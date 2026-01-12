@@ -1,180 +1,269 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Risha Games — Coming Soon</title>
-
-    <!-- SEO -->
-    <meta name="description" content="Risha Games is launching soon. A next-generation gaming platform powered by Risha Digital.">
-    <meta name="keywords" content="Risha Games, Online Games, Gaming Platform, Coming Soon">
-    <meta name="author" content="Risha Digital">
+    <title>ريشة للألعاب | Risha Games</title>
+    
+    <meta name="description" content="منصة ريشة للألعاب - جيل جديد من الألعاب التفاعلية الجماعية.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Risha Games — Coming Soon">
-    <meta property="og:description" content="A new gaming universe is loading. Stay tuned.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.risha.games">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-main: #05050a;
-            --bg-glow: #0b0f2a;
             --primary: #7f5cff;
             --secondary: #00f5ff;
+            --accent: #ff0055;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
             --text-main: #ffffff;
-            --text-muted: #9ca3af;
+            --text-muted: #a0a0a0;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
         }
 
         body {
-            min-height: 100vh;
-            background:
-                radial-gradient(circle at top, var(--bg-glow), transparent 60%),
-                var(--bg-main);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
             color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
         }
 
-        /* Background particles */
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255,255,255,0.3);
-            animation: float 20s linear infinite;
+        /* خلفية متحركة */
+        .background-fx {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(127, 92, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 245, 255, 0.08), transparent 25%);
         }
 
-        @keyframes float {
-            from {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-            10% { opacity: 1; }
-            to {
-                transform: translateY(-10vh);
-                opacity: 0;
-            }
-        }
-
+        /* الحاويات */
         .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
-            max-width: 900px;
-            padding: 40px;
-            z-index: 2;
+            padding: 50px 20px;
+            flex: 1;
         }
 
-        .brand {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 4px;
+        /* الهيدر والعنوان */
+        header {
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .brand-tag {
             color: var(--secondary);
-            margin-bottom: 20px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: inline-block;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(0, 245, 255, 0.05);
         }
 
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.2;
             margin-bottom: 20px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #fff 30%, var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
         }
 
-        .subtitle {
-            font-size: 1.1rem;
+        p.subtitle {
             color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 40px;
-            line-height: 1.7;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        .status-box {
-            display: inline-block;
-            padding: 18px 36px;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(10px);
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            color: var(--secondary);
-            margin-bottom: 60px;
+        /* شبكة الألعاب */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
         }
 
-        footer {
-            position: absolute;
-            bottom: 25px;
-            width: 100%;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        footer a {
-            color: var(--primary);
+        /* بطاقة اللعبة */
+        .game-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px 20px;
             text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            backdrop-filter: blur(10px);
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(127, 92, 255, 0.4);
         }
+
+        .game-card:hover .play-btn {
+            background: var(--secondary);
+            color: #000;
+            box-shadow: 0 0 20px var(--secondary);
+        }
+
+        .game-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+        }
+
+        .game-title {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .game-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .play-btn {
+            padding: 10px 30px;
+            background: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+            border-radius: 50px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        /* الفوتر */
+        footer {
+            padding: 30px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            width: 100%;
+            margin-top: 50px;
+        }
+        
+        footer a { color: var(--secondary); text-decoration: none; }
+
+        /* الأنيميشن البسيط */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating { animation: float 4s ease-in-out infinite; }
+
     </style>
 </head>
 <body>
 
-    <!-- Particles -->
-    <script>
-        for (let i = 0; i < 60; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.animationDuration = (15 + Math.random() * 20) + 's';
-            p.style.animationDelay = Math.random() * 20 + 's';
-            document.body.appendChild(p);
-        }
-    </script>
+    <div class="background-fx"></div>
 
     <div class="container">
-        <div class="brand">RISHA GAMES</div>
+        <header>
+            <span class="brand-tag">RISHA GAMES BETA</span>
+            <h1>ساحة الألعاب</h1>
+            <p class="subtitle">استمتع بتشكيلة مميزة من الألعاب التفاعلية الجماعية. العب مباشرة مع أصدقائك الآن.</p>
+        </header>
 
-        <h1>COMING SOON</h1>
+        <div class="games-grid">
+            
+            <a href="/mishnaqa" class="game-card">
+                <div class="game-icon floating" style="animation-delay: 0s;">😵</div>
+                <h3 class="game-title">المشنقة</h3>
+                <p class="game-desc">هل يمكنك تخمين الكلمة قبل فوات الأوان؟ تحدى ذكائك الآن.</p>
+                <span class="play-btn">العب الآن</span>
+            </a>
 
-        <p class="subtitle">
-            A new gaming universe is loading.
-            <br>
-            Risha Games is an upcoming platform dedicated to immersive, accessible, and innovative online games —
-            built with passion and powered by <strong>Risha Digital</strong>.
-        </p>
+            <a href="/HROF-GAME" class="game-card">
+                <div class="game-icon floating" style="animation-delay: 0.5s;">🅰️</div>
+                <h3 class="game-title">لعبة الحروف</h3>
+                <p class="game-desc">سرعة بديهة وكلمات، من الأسرع في إيجاد الكلمات بالحرف المطلوب؟</p>
+                <span class="play-btn">العب الآن</span>
+            </a>
 
-        <div class="status-box">
-            LAUNCH IN PROGRESS
+            <a href="/tictak_ultimate" class="game-card">
+                <div class="game-icon floating" style="animation-delay: 1s;">⭕</div>
+                <h3 class="game-title">Tic Tac Toe</h3>
+                <p class="game-desc">لعبة إكس أو الكلاسيكية بتحدي جديد وممتع.</p>
+                <span class="play-btn">العب الآن</span>
+            </a>
+
+            <a href="/NeuSwalif" class="game-card">
+                <div class="game-icon floating" style="animation-delay: 1.5s;">💬</div>
+                <h3 class="game-title">سوالف</h3>
+                <p class="game-desc">أسئلة ومواضيع للنقاش لكسر الجليد وبدء محادثات ممتعة.</p>
+                <span class="play-btn">العب الآن</span>
+            </a>
+
+            <a href="/imposter" class="game-card">
+                <div class="game-icon floating" style="animation-delay: 2s;">🕵️</div>
+                <h3 class="game-title">الجاسوس</h3>
+                <p class="game-desc">اكتشف من هو الدخيل بينكم في لعبة الشك والذكاء.</p>
+                <span class="play-btn">العب الآن</span>
+            </a>
+
+            <a href="/Question_Answer" class="game-card">
+                <div class="game-icon floating" style="animation-delay: 2.5s;">❓</div>
+                <h3 class="game-title">سؤال وجواب</h3>
+                <p class="game-desc">اختبر معلوماتك العامة وتحدى أصدقائك.</p>
+                <span class="play-btn">العب الآن</span>
+            </a>
+            
+             <a href="/KalimaTac_N-Pixell" class="game-card">
+                <div class="game-icon floating" style="animation-delay: 3s;">🧩</div>
+                <h3 class="game-title">كلماتك</h3>
+                <p class="game-desc">لعبة تخمين الكلمات بأسلوب ممتع وجديد.</p>
+                <span class="play-btn">العب الآن</span>
+            </a>
+
         </div>
     </div>
 
     <footer>
-        © <span id="year"></span> Risha Games.
-        A project by <a href="https://www.risha.digital" target="_blank">Risha Digital</a>.
-        All rights reserved.
+        <p>© <span id="year"></span> جميع الحقوق محفوظة لمنصة <strong>ريشة للألعاب</strong>.</p>
+        <p style="margin-top: 5px; font-size: 0.75rem; opacity: 0.6;">Powered by Risha Digital</p>
     </footer>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
-
 </body>
 </html>
