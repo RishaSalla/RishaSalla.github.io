@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Risha Games — Coming Soon</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Risha Games is launching soon. A next-generation gaming platform powered by Risha Digital.">
+    <meta name="keywords" content="Risha Games, Online Games, Gaming Platform, Coming Soon">
+    <meta name="author" content="Risha Digital">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Risha Games — Coming Soon">
+    <meta property="og:description" content="A new gaming universe is loading. Stay tuned.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.risha.games">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #05050a;
+            --bg-glow: #0b0f2a;
+            --primary: #7f5cff;
+            --secondary: #00f5ff;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top, var(--bg-glow), transparent 60%),
+                var(--bg-main);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Background particles */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 900px;
+            padding: 40px;
+            z-index: 2;
+        }
+
+        .brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .status-box {
+            display: inline-block;
+            padding: 18px 36px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 60px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 25px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particles -->
+    <script>
+        for (let i = 0; i < 60; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (15 + Math.random() * 20) + 's';
+            p.style.animationDelay = Math.random() * 20 + 's';
+            document.body.appendChild(p);
+        }
+    </script>
+
+    <div class="container">
+        <div class="brand">RISHA GAMES</div>
+
+        <h1>COMING SOON</h1>
+
+        <p class="subtitle">
+            A new gaming universe is loading.
+            <br>
+            Risha Games is an upcoming platform dedicated to immersive, accessible, and innovative online games —
+            built with passion and powered by <strong>Risha Digital</strong>.
+        </p>
+
+        <div class="status-box">
+            LAUNCH IN PROGRESS
+        </div>
+    </div>
+
+    <footer>
+        © <span id="year"></span> Risha Games.
+        A project by <a href="https://www.risha.digital" target="_blank">Risha Digital</a>.
+        All rights reserved.
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
