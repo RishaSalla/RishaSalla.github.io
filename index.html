@@ -7,18 +7,23 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            /* ألوان التصميم الأول (النيون والبنفسجي) */
-            --bg-main: #05050a;
-            --primary: #7f5cff;
-            --secondary: #00f5ff;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            /* لوحة الألوان الجديدة: غامقة ومثيرة (Cyberpunk Theme) */
+            --bg-main: #020205;      /* أسود عميق */
+            --bg-secondary: #0a0a14; /* كحلي ليلي */
+            
+            --accent-cyan: #00fff2;   /* سماوي كهربائي */
+            --accent-violet: #d400ff; /* بنفسجي حاد */
+            
+            --glass-dark: rgba(10, 10, 25, 0.7); /* زجاج داكن */
+            --border-dim: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(0, 255, 242, 0.3);
+            
             --text-main: #ffffff;
-            --text-muted: #a0a0a0;
+            --text-muted: #94a3b8;
         }
 
         * {
@@ -34,20 +39,22 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            /* الخلفية الحيوية القديمة */
-            background: radial-gradient(circle at top, #1a1f3c, #05050a 60%);
+            /* خلفية درامية مظلمة مع إضاءة خافتة */
+            background: 
+                radial-gradient(circle at 50% 0%, rgba(212, 0, 255, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 242, 0.1), transparent 30%),
+                linear-gradient(to bottom, #0a0a14, #020205);
         }
 
-        /* --- الهيدر (رأس الصفحة) --- */
+        /* --- الهيدر --- */
         header {
-            background: rgba(5, 5, 10, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+            background: rgba(2, 2, 5, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-dim);
             padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
         }
 
         .header-content {
@@ -64,27 +71,22 @@
             font-weight: 900;
             color: var(--text-main);
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
-        .logo span { color: var(--secondary); }
+        .logo span { 
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px rgba(0, 255, 242, 0.5);
+        }
 
         .nav-status {
-            font-size: 0.9rem;
-            color: var(--primary);
+            font-size: 0.85rem;
+            color: var(--text-muted);
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .nav-status::before {
-            content: '';
-            display: block;
-            width: 8px;
-            height: 8px;
-            background: var(--secondary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--secondary);
+            background: rgba(255,255,255,0.05);
+            padding: 5px 15px;
+            border-radius: 50px;
+            border: 1px solid var(--border-dim);
         }
 
         /* --- المحتوى الرئيسي --- */
@@ -92,29 +94,81 @@
             width: 90%;
             max-width: 1200px;
             margin: 60px auto;
-            flex: 1; /* لملء الفراغ ودفع الفوتر للأسفل */
+            flex: 1;
         }
 
         .hero-text {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 900;
             margin-bottom: 15px;
-            background: linear-gradient(90deg, #fff, var(--primary));
+            /* نص متدرج مثير */
+            background: linear-gradient(to right, var(--text-main), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
+            font-size: 1.15rem;
+            max-width: 650px;
             margin: 0 auto;
+            line-height: 1.6;
         }
+
+        /* --- بانر المتجر (CTA Banner) الجديد --- */
+        .store-cta-banner {
+            background: linear-gradient(90deg, rgba(212, 0, 255, 0.05), rgba(0, 255, 242, 0.05));
+            border: 1px solid var(--border-dim);
+            /* حدود جانبية مضيئة */
+            border-right: 3px solid var(--accent-cyan);
+            border-left: 3px solid var(--accent-violet);
+            border-radius: 16px;
+            padding: 25px 35px;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .store-cta-text p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+        .store-cta-text span {
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        .store-btn {
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan));
+            color: #000;
+            font-weight: 800;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
+            transition: 0.3s;
+        }
+
+        .store-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(212, 0, 255, 0.5);
+        }
+        .store-btn svg { width: 20px; height: 20px; }
 
         /* --- الشبكة --- */
         .games-grid {
@@ -123,129 +177,141 @@
             gap: 30px;
         }
 
-        /* --- البطاقة (الستايل الأول) --- */
+        /* --- البطاقة (تصميم داكن ومثير) --- */
         .game-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px 20px;
+            background: var(--glass-dark);
+            border: 1px solid var(--border-dim);
+            border-radius: 24px;
+            padding: 35px 25px;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            z-index: 1;
         }
 
-        /* تأثير البطاقة النشطة فقط */
+        /* خلفية متدرجة خفيفة عند الهوفر */
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(212, 0, 255, 0.1), rgba(0, 255, 242, 0.1));
+            opacity: 0;
+            transition: 0.4s;
+            z-index: -1;
+        }
+
+        /* تأثير البطاقة النشطة */
         .game-card.active:hover {
             transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px -10px rgba(127, 92, 255, 0.4);
+            border-color: var(--border-glow);
+            box-shadow: 0 15px 40px -10px rgba(0, 255, 242, 0.2);
         }
+        .game-card.active:hover::before { opacity: 1; }
 
         .game-icon {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
-            transition: 0.3s;
+            /* ظل للأيقونة */
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+            transition: 0.4s;
         }
-        
-        .game-card.active:hover .game-icon { transform: scale(1.1); }
+        .game-card.active:hover .game-icon { 
+            transform: scale(1.1) rotate(-5deg);
+            filter: drop-shadow(0 0 20px var(--accent-violet));
+        }
 
         .game-title {
-            color: #fff;
-            font-size: 1.4rem;
-            font-weight: 700;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            font-weight: 800;
             margin-bottom: 10px;
         }
 
         .game-desc {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-            line-height: 1.5;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         .action-btn {
             margin-top: auto;
-            padding: 10px 30px;
+            padding: 12px 35px;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
+            font-weight: 800;
+            font-size: 0.95rem;
             width: 100%;
             transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
         }
 
-        /* تنسيق البطاقات النشطة */
+        /* زر البطاقات النشطة */
         .game-card.active .action-btn {
             background: transparent;
-            border: 1px solid var(--secondary);
-            color: var(--secondary);
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
         }
         
         .game-card.active:hover .action-btn {
-            background: var(--secondary);
+            background: var(--accent-cyan);
             color: #000;
-            box-shadow: 0 0 20px var(--secondary);
+            box-shadow: 0 0 30px var(--accent-cyan);
         }
 
-        /* --- تنسيق البطاقات المغلقة (Coming Soon) --- */
+        /* --- البطاقات المغلقة --- */
         .game-card.disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: default;
-            pointer-events: none; /* يمنع الضغط */
-            border-color: rgba(255,255,255,0.05);
-            background: rgba(0,0,0,0.2);
+            pointer-events: none;
+            background: rgba(5, 5, 10, 0.6);
         }
-
-        .game-card.disabled .game-icon { filter: grayscale(100%); opacity: 0.5; }
-
+        .game-card.disabled .game-icon { filter: grayscale(100%); opacity: 0.4; }
         .game-card.disabled .action-btn {
-            border: 1px dashed var(--text-muted);
+            border: 1px solid var(--border-dim);
             color: var(--text-muted);
-            background: transparent;
         }
 
-        /* شارة قريباً */
         .coming-soon-badge {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-size: 0.7rem;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--border-dim);
+            font-weight: 700;
         }
 
-        /* --- الفوتر (تذييل الصفحة) --- */
+        /* --- الفوتر --- */
         footer {
-            background: #020204;
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            margin-top: 50px;
+            background: #010103;
+            border-top: 1px solid var(--border-dim);
+            padding: 50px 0;
+            margin-top: 80px;
             text-align: center;
         }
 
-        .footer-content p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
         .footer-link {
-            color: var(--primary);
+            color: var(--accent-cyan);
             text-decoration: none;
             font-weight: 700;
             transition: 0.3s;
+            border-bottom: 1px dotted var(--accent-cyan);
         }
-        
-        .footer-link:hover { color: var(--secondary); text-shadow: 0 0 10px var(--secondary); }
+        .footer-link:hover { color: var(--accent-violet); border-color: var(--accent-violet); }
 
+        @media (max-width: 768px) {
+            .store-cta-banner { text-align: center; justify-content: center; }
+        }
     </style>
 </head>
 <body>
@@ -253,45 +319,58 @@
     <header>
         <div class="header-content">
             <div class="logo">RISHA <span>GAMES</span></div>
-            <div class="nav-status">BETA VERSION</div>
+            <div class="nav-status">BETA</div>
         </div>
     </header>
 
     <div class="main-container">
         
         <div class="hero-text">
-            <h1>ساحة الألعاب</h1>
-            <p class="subtitle">اختر لعبتك المفضلة وابدأ التحدي فوراً مع أصدقائك.</p>
+            <h1>ساحة الألعاب التفاعلية</h1>
+            <p class="subtitle">اختر لعبتك المفضلة وابدأ التحدي فوراً مع أصدقائك في بيئة حماسية.</p>
+        </div>
+
+        <div class="store-cta-banner">
+            <div class="store-cta-text">
+                <p>أعجبتك الألعاب؟ احصل على نسختك الخاصة الآن!</p>
+                <span>وفاجئ أصدقائك في جمعتكم القادمة بإدارة كاملة للعبة.</span>
+            </div>
+            <a href="https://risha.digital/ar/%D8%A7%D9%84%D8%A3%D9%84%D8%B9%D8%A7%D8%A8-%D9%88%D8%A7%D9%84%D8%AA%D8%AC%D9%85%D8%B9%D8%A7%D8%AA/page-1056745314" target="_blank" class="store-btn">
+                احصل على اللعبة
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                </svg>
+            </a>
         </div>
 
         <div class="games-grid">
             
             <a href="/mishnaqa" class="game-card active">
-                <div class="game-icon">😵</div>
-                <h3 class="game-title">المشنقة</h3>
+                <div class="game-icon">🪢</div>
+                <h3 class="game-title">لعبة المشنقة</h3>
                 <p class="game-desc">خمن الكلمة وأنقذ الموقف قبل فوات الأوان.</p>
                 <div class="action-btn">العب الآن</div>
             </a>
 
             <a href="/HROF-GAME" class="game-card active">
                 <div class="game-icon">🅰️</div>
-                <h3 class="game-title">لعبة الحروف</h3>
-                <p class="game-desc">سباق السرعة والكلمات، من الأسرع؟</p>
+                <h3 class="game-title">لعبة حروف</h3>
+                <p class="game-desc"> من الأسرع؟</p>
                 <div class="action-btn">العب الآن</div>
             </a>
 
             <div class="game-card disabled">
                 <span class="coming-soon-badge">قريباً</span>
                 <div class="game-icon">⭕</div>
-                <h3 class="game-title">Tic Tac Toe</h3>
-                <p class="game-desc">تحدي إكس أو الكلاسيكي.</p>
+                <h3 class="game-title">لعبة حسبتاك</h3>
+                <p class="game-desc">تحدي إكس أو الرياضي.</p>
                 <div class="action-btn">قريباً</div>
             </div>
 
             <div class="game-card disabled">
                 <span class="coming-soon-badge">قريباً</span>
                 <div class="game-icon">💬</div>
-                <h3 class="game-title">سوالف</h3>
+                <h3 class="game-title">لعبة سوالف</h3>
                 <p class="game-desc">مواضيع للنقاش وكسر الجليد.</p>
                 <div class="action-btn">قريباً</div>
             </div>
@@ -299,7 +378,7 @@
             <div class="game-card disabled">
                 <span class="coming-soon-badge">قريباً</span>
                 <div class="game-icon">🕵️</div>
-                <h3 class="game-title">الجاسوس</h3>
+                <h3 class="game-title">لعبة المحتال</h3>
                 <p class="game-desc">اكتشف الدخيل المتخفي بينكم.</p>
                 <div class="action-btn">قريباً</div>
             </div>
@@ -307,7 +386,7 @@
             <div class="game-card disabled">
                 <span class="coming-soon-badge">قريباً</span>
                 <div class="game-icon">🧠</div>
-                <h3 class="game-title">سؤال وجواب</h3>
+                <h3 class="game-title">لعبة سؤال وجواب</h3>
                 <p class="game-desc">اختبر معلوماتك العامة.</p>
                 <div class="action-btn">قريباً</div>
             </div>
@@ -315,7 +394,7 @@
             <div class="game-card disabled">
                 <span class="coming-soon-badge">قريباً</span>
                 <div class="game-icon">🧩</div>
-                <h3 class="game-title">كلماتك</h3>
+                <h3 class="game-title">لعبة كلمتاك</h3>
                 <p class="game-desc">لعبة تجميع الكلمات الممتعة.</p>
                 <div class="action-btn">قريباً</div>
             </div>
@@ -326,7 +405,7 @@
     <footer>
         <div class="footer-content">
             <p>© <span id="year"></span> جميع الحقوق محفوظة لمنصة <strong>ريشة للألعاب</strong>.</p>
-            <p style="font-size: 0.8rem; opacity: 0.7;">
+            <p style="font-size: 0.85rem; opacity: 0.6; margin-top: 10px;">
                 POWERED BY <a href="https://www.risha.digital" target="_blank" class="footer-link">RISHA DIGITAL</a>
             </p>
         </div>
