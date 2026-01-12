@@ -11,14 +11,14 @@
 
     <style>
         :root {
-            /* الألوان الداكنة الفخمة */
-            --bg-core: #02040a;
-            --bg-card: #0d1117;
-            --border-color: #30363d;
-            --accent: #58a6ff; /* أزرق هادئ */
-            --accent-glow: rgba(56, 139, 253, 0.4);
-            --text-main: #c9d1d9;
-            --text-header: #ffffff;
+            /* ألوان التصميم الأول (النيون والبنفسجي) */
+            --bg-main: #05050a;
+            --primary: #7f5cff;
+            --secondary: #00f5ff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
         }
 
         * {
@@ -29,264 +29,307 @@
         }
 
         body {
-            background-color: var(--bg-core);
+            background-color: var(--bg-main);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            /* خلفية شبكية خفيفة جداً للعمق */
-            background-image: linear-gradient(#161b22 1px, transparent 1px), linear-gradient(90deg, #161b22 1px, transparent 1px);
-            background-size: 40px 40px;
+            /* الخلفية الحيوية القديمة */
+            background: radial-gradient(circle at top, #1a1f3c, #05050a 60%);
         }
 
-        .container {
+        /* --- الهيدر (رأس الصفحة) --- */
+        header {
+            background: rgba(5, 5, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+
+        .header-content {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+        
+        .logo span { color: var(--secondary); }
+
+        .nav-status {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-status::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: var(--secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        /* --- المحتوى الرئيسي --- */
+        .main-container {
             width: 90%;
             max-width: 1200px;
             margin: 60px auto;
-            flex: 1;
+            flex: 1; /* لملء الفراغ ودفع الفوتر للأسفل */
         }
 
-        /* رأس الصفحة */
-        header {
+        .hero-text {
             text-align: center;
-            margin-bottom: 70px;
-            position: relative;
-        }
-
-        .status-pill {
-            display: inline-block;
-            border: 1px solid var(--border-color);
-            background: rgba(255,255,255,0.05);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            color: var(--accent);
-            margin-bottom: 20px;
-            backdrop-filter: blur(5px);
+            margin-bottom: 50px;
         }
 
         h1 {
-            color: var(--text-header);
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 900;
             margin-bottom: 15px;
-            text-shadow: 0 0 40px rgba(88, 166, 255, 0.2);
+            background: linear-gradient(90deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
-            color: #8b949e;
-            line-height: 1.6;
         }
 
-        /* شبكة الألعاب */
+        /* --- الشبكة --- */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
-        /* تصميم البطاقة الجديد: داكن + حركة */
+        /* --- البطاقة (الستايل الأول) --- */
         .game-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 30px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px 20px;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-        }
-
-        /* توهج عند الهوفر */
-        .game-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.7);
-        }
-
-        .game-card:hover .game-title {
-            color: var(--accent);
-        }
-
-        /* الأيقونة */
-        .icon-box {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            width: 70px;
-            height: 70px;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s;
+            text-align: center;
         }
 
-        .game-card:hover .icon-box {
-            background: rgba(88, 166, 255, 0.1);
-            transform: scale(1.1) rotate(5deg);
+        /* تأثير البطاقة النشطة فقط */
+        .game-card.active:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(127, 92, 255, 0.4);
         }
+
+        .game-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+            transition: 0.3s;
+        }
+        
+        .game-card.active:hover .game-icon { transform: scale(1.1); }
 
         .game-title {
-            color: var(--text-header);
+            color: #fff;
             font-size: 1.4rem;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 10px;
-            transition: 0.3s;
         }
 
         .game-desc {
-            color: #8b949e;
+            color: var(--text-muted);
             font-size: 0.9rem;
-            line-height: 1.5;
             margin-bottom: 25px;
-            flex-grow: 1;
+            line-height: 1.5;
         }
 
-        /* الزر التفاعلي */
-        .play-link {
-            color: var(--text-header);
-            font-size: 0.9rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            width: 100%;
-            border-top: 1px solid rgba(255,255,255,0.05);
+        .action-btn {
             margin-top: auto;
-        }
-
-        .play-link span { margin-left: 10px; }
-        
-        .arrow {
-            transition: 0.3s;
-            opacity: 0.5;
-        }
-
-        .game-card:hover .arrow {
-            transform: translateX(-5px);
-            opacity: 1;
-            color: var(--accent);
-        }
-
-        /* الفوتر */
-        footer {
-            margin-top: 60px;
-            padding: 40px;
-            text-align: center;
-            color: #484f58;
-            border-top: 1px solid var(--border-color);
-            width: 100%;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: 700;
             font-size: 0.9rem;
+            width: 100%;
+            transition: 0.3s;
         }
 
-        footer a {
-            color: #8b949e;
+        /* تنسيق البطاقات النشطة */
+        .game-card.active .action-btn {
+            background: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .game-card.active:hover .action-btn {
+            background: var(--secondary);
+            color: #000;
+            box-shadow: 0 0 20px var(--secondary);
+        }
+
+        /* --- تنسيق البطاقات المغلقة (Coming Soon) --- */
+        .game-card.disabled {
+            opacity: 0.6;
+            cursor: default;
+            pointer-events: none; /* يمنع الضغط */
+            border-color: rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .game-card.disabled .game-icon { filter: grayscale(100%); opacity: 0.5; }
+
+        .game-card.disabled .action-btn {
+            border: 1px dashed var(--text-muted);
+            color: var(--text-muted);
+            background: transparent;
+        }
+
+        /* شارة قريباً */
+        .coming-soon-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- الفوتر (تذييل الصفحة) --- */
+        footer {
+            background: #020204;
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .footer-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-link {
+            color: var(--primary);
             text-decoration: none;
+            font-weight: 700;
             transition: 0.3s;
         }
         
-        footer a:hover { color: var(--accent); }
+        .footer-link:hover { color: var(--secondary); text-shadow: 0 0 10px var(--secondary); }
 
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <div class="status-pill">● متصل الآن</div>
-            <h1>بوابة ريشة للألعاب</h1>
-            <p class="subtitle">وجهتك الأولى للألعاب الجماعية التفاعلية. اختر لعبتك، شارك الرابط، وابدأ التحدي فوراً.</p>
-        </header>
+    <header>
+        <div class="header-content">
+            <div class="logo">RISHA <span>GAMES</span></div>
+            <div class="nav-status">BETA VERSION</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="hero-text">
+            <h1>ساحة الألعاب</h1>
+            <p class="subtitle">اختر لعبتك المفضلة وابدأ التحدي فوراً مع أصدقائك.</p>
+        </div>
 
         <div class="games-grid">
             
-            <a href="/mishnaqa" class="game-card">
-                <div class="icon-box">😵</div>
+            <a href="/mishnaqa" class="game-card active">
+                <div class="game-icon">😵</div>
                 <h3 class="game-title">المشنقة</h3>
-                <p class="game-desc">هل يمكنك تخمين الكلمة قبل فوات الأوان؟ تحدى ذكاءك اللغوي.</p>
-                <div class="play-link">
-                    <span>ابدا اللعب</span>
-                    <span class="arrow">←</span>
-                </div>
+                <p class="game-desc">خمن الكلمة وأنقذ الموقف قبل فوات الأوان.</p>
+                <div class="action-btn">العب الآن</div>
             </a>
 
-            <a href="/HROF-GAME" class="game-card">
-                <div class="icon-box">🅰️</div>
+            <a href="/HROF-GAME" class="game-card active">
+                <div class="game-icon">🅰️</div>
                 <h3 class="game-title">لعبة الحروف</h3>
-                <p class="game-desc">سرعة بديهة وكلمات، من الأسرع في إيجاد الكلمات بالحرف المطلوب؟</p>
-                <div class="play-link">
-                    <span>ابدا اللعب</span>
-                    <span class="arrow">←</span>
-                </div>
+                <p class="game-desc">سباق السرعة والكلمات، من الأسرع؟</p>
+                <div class="action-btn">العب الآن</div>
             </a>
 
-            <a href="/tictak_ultimate" class="game-card">
-                <div class="icon-box">⭕</div>
+            <div class="game-card disabled">
+                <span class="coming-soon-badge">قريباً</span>
+                <div class="game-icon">⭕</div>
                 <h3 class="game-title">Tic Tac Toe</h3>
-                <p class="game-desc">لعبة إكس أو الكلاسيكية بتحدي جديد وممتع.</p>
-                <div class="play-link">
-                    <span>ابدا اللعب</span>
-                    <span class="arrow">←</span>
-                </div>
-            </a>
+                <p class="game-desc">تحدي إكس أو الكلاسيكي.</p>
+                <div class="action-btn">قريباً</div>
+            </div>
 
-            <a href="/NeuSwalif" class="game-card">
-                <div class="icon-box">💬</div>
+            <div class="game-card disabled">
+                <span class="coming-soon-badge">قريباً</span>
+                <div class="game-icon">💬</div>
                 <h3 class="game-title">سوالف</h3>
-                <p class="game-desc">مواضيع للنقاش لكسر الجليد وبدء محادثات ممتعة مع المجموعة.</p>
-                <div class="play-link">
-                    <span>ابدا اللعب</span>
-                    <span class="arrow">←</span>
-                </div>
-            </a>
+                <p class="game-desc">مواضيع للنقاش وكسر الجليد.</p>
+                <div class="action-btn">قريباً</div>
+            </div>
 
-            <a href="/imposter" class="game-card">
-                <div class="icon-box">🕵️</div>
+            <div class="game-card disabled">
+                <span class="coming-soon-badge">قريباً</span>
+                <div class="game-icon">🕵️</div>
                 <h3 class="game-title">الجاسوس</h3>
-                <p class="game-desc">اكتشف من هو الدخيل المتخفي بينكم في لعبة الشك والذكاء.</p>
-                <div class="play-link">
-                    <span>ابدا اللعب</span>
-                    <span class="arrow">←</span>
-                </div>
-            </a>
+                <p class="game-desc">اكتشف الدخيل المتخفي بينكم.</p>
+                <div class="action-btn">قريباً</div>
+            </div>
 
-            <a href="/Question_Answer" class="game-card">
-                <div class="icon-box">🧠</div>
+            <div class="game-card disabled">
+                <span class="coming-soon-badge">قريباً</span>
+                <div class="game-icon">🧠</div>
                 <h3 class="game-title">سؤال وجواب</h3>
-                <p class="game-desc">اختبر معلوماتك العامة وتحدى أصدقائك في مسابقة ثقافية.</p>
-                <div class="play-link">
-                    <span>ابدا اللعب</span>
-                    <span class="arrow">←</span>
-                </div>
-            </a>
+                <p class="game-desc">اختبر معلوماتك العامة.</p>
+                <div class="action-btn">قريباً</div>
+            </div>
 
-            <a href="/KalimaTac_N-Pixell" class="game-card">
-                <div class="icon-box">🧩</div>
+            <div class="game-card disabled">
+                <span class="coming-soon-badge">قريباً</span>
+                <div class="game-icon">🧩</div>
                 <h3 class="game-title">كلماتك</h3>
-                <p class="game-desc">لعبة تخمين الكلمات وتجميعها بأسلوب ممتع وجديد.</p>
-                <div class="play-link">
-                    <span>ابدا اللعب</span>
-                    <span class="arrow">←</span>
-                </div>
-            </a>
+                <p class="game-desc">لعبة تجميع الكلمات الممتعة.</p>
+                <div class="action-btn">قريباً</div>
+            </div>
 
         </div>
     </div>
 
     <footer>
-        <p>© <span id="year"></span> جميع الحقوق محفوظة لمنصة <strong>ريشة للألعاب</strong>.</p>
-        <p style="margin-top: 10px; opacity: 0.6;">
-            Powered by <a href="https://www.risha.digital" target="_blank">RISHA DIGITAL</a>
-        </p>
+        <div class="footer-content">
+            <p>© <span id="year"></span> جميع الحقوق محفوظة لمنصة <strong>ريشة للألعاب</strong>.</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">
+                POWERED BY <a href="https://www.risha.digital" target="_blank" class="footer-link">RISHA DIGITAL</a>
+            </p>
+        </div>
     </footer>
 
     <script>
