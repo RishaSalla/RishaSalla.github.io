@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>ريشة للألعاب | Risha Games</title>
-    <meta name="description" content="منصة ريشة للألعاب - العب واستمتع مع أصدقائك.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,13 +11,14 @@
 
     <style>
         :root {
-            --primary: #6366f1;
-            --secondary: #ec4899;
-            --cyan: #06b6d4;
-            --dark-bg: #0f172a;
-            --glass-bg: rgba(255, 255, 255, 0.07);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --text-glow: 0 0 20px rgba(99, 102, 241, 0.6);
+            /* الألوان الداكنة الفخمة */
+            --bg-core: #02040a;
+            --bg-card: #0d1117;
+            --border-color: #30363d;
+            --accent: #58a6ff; /* أزرق هادئ */
+            --accent-glow: rgba(56, 139, 253, 0.4);
+            --text-main: #c9d1d9;
+            --text-header: #ffffff;
         }
 
         * {
@@ -29,276 +29,254 @@
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: #ffffff;
+            background-color: var(--bg-core);
+            color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* خلفية متدرجة متحركة */
-            background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
-        }
-
-        /* كرات ضوئية في الخلفية لإضافة حيوية */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.6;
-            animation: floatOrb 10s infinite alternate ease-in-out;
-        }
-        .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--primary); animation-delay: 0s; }
-        .orb-2 { bottom: -10%; right: -10%; width: 40vw; height: 40vw; background: var(--secondary); animation-delay: -5s; }
-        .orb-3 { top: 40%; left: 40%; width: 30vw; height: 30vw; background: var(--cyan); opacity: 0.4; animation-duration: 15s; }
-
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(30px, 50px) scale(1.1); }
+            /* خلفية شبكية خفيفة جداً للعمق */
+            background-image: linear-gradient(#161b22 1px, transparent 1px), linear-gradient(90deg, #161b22 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
         .container {
             width: 90%;
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
+            margin: 60px auto;
             flex: 1;
         }
 
-        /* الهيدر */
+        /* رأس الصفحة */
         header {
-            margin-bottom: 60px;
+            text-align: center;
+            margin-bottom: 70px;
             position: relative;
         }
 
-        .badge {
+        .status-pill {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 20px;
+            border: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.05);
+            padding: 6px 16px;
             border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--accent);
             margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            color: var(--cyan);
-            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
         }
 
         h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--text-header);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 900;
             margin-bottom: 15px;
-            line-height: 1.2;
-            /* نص متدرج */
-            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-shadow: 0 0 40px rgba(88, 166, 255, 0.2);
         }
 
         .subtitle {
             font-size: 1.2rem;
-            color: #cbd5e1;
             max-width: 600px;
             margin: 0 auto;
+            color: #8b949e;
             line-height: 1.6;
-            font-weight: 400;
         }
 
-        /* الشبكة */
+        /* شبكة الألعاب */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            perspective: 1000px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        /* البطاقة الإبداعية */
+        /* تصميم البطاقة الجديد: داكن + حركة */
         .game-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             padding: 30px;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* حركة نطاطة */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            align-items: flex-start;
         }
 
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 4px;
-            background: linear-gradient(90deg, var(--secondary), var(--cyan));
-            opacity: 0;
-            transition: 0.3s;
-        }
-
+        /* توهج عند الهوفر */
         .game-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.7);
         }
 
-        .game-card:hover::before { opacity: 1; }
+        .game-card:hover .game-title {
+            color: var(--accent);
+        }
 
-        /* الأيقونة داخل دائرة مضيئة */
-        .icon-wrapper {
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), rgba(0,0,0,0.2));
-            border-radius: 50%;
+        /* الأيقونة */
+        .icon-box {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            width: 70px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
             transition: 0.4s;
         }
 
-        .game-card:hover .icon-wrapper {
-            transform: rotate(10deg) scale(1.1);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 20px var(--text-glow);
+        .game-card:hover .icon-box {
+            background: rgba(88, 166, 255, 0.1);
+            transform: scale(1.1) rotate(5deg);
         }
 
         .game-title {
-            color: #fff;
-            font-size: 1.5rem;
+            color: var(--text-header);
+            font-size: 1.4rem;
             font-weight: 800;
             margin-bottom: 10px;
+            transition: 0.3s;
         }
 
         .game-desc {
-            color: #94a3b8;
-            font-size: 0.95rem;
+            color: #8b949e;
+            font-size: 0.9rem;
             line-height: 1.5;
             margin-bottom: 25px;
             flex-grow: 1;
         }
 
-        /* زر اللعب */
-        .play-btn {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 10px 30px;
-            border-radius: 50px;
+        /* الزر التفاعلي */
+        .play-link {
+            color: var(--text-header);
+            font-size: 0.9rem;
             font-weight: 700;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
-            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
             width: 100%;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: auto;
         }
 
-        .game-card:hover .play-btn {
-            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
-            transform: scale(1.05);
+        .play-link span { margin-left: 10px; }
+        
+        .arrow {
+            transition: 0.3s;
+            opacity: 0.5;
+        }
+
+        .game-card:hover .arrow {
+            transform: translateX(-5px);
+            opacity: 1;
+            color: var(--accent);
         }
 
         /* الفوتر */
         footer {
-            margin-top: auto;
+            margin-top: 60px;
             padding: 40px;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            color: #484f58;
+            border-top: 1px solid var(--border-color);
             width: 100%;
             font-size: 0.9rem;
-            color: #94a3b8;
         }
 
         footer a {
-            color: var(--cyan);
+            color: #8b949e;
             text-decoration: none;
-            font-weight: 700;
-            position: relative;
             transition: 0.3s;
         }
+        
+        footer a:hover { color: var(--accent); }
 
-        footer a:hover {
-            color: #fff;
-            text-shadow: 0 0 10px var(--cyan);
-        }
-
-        /* Responsive Fixes */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .container { padding: 40px 15px; }
-        }
     </style>
 </head>
 <body>
 
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
     <div class="container">
         <header>
-            <span class="badge">🔥 ساحة الألعاب الجديدة</span>
-            <h1>اختر لعبتك وابدأ التحدي</h1>
-            <p class="subtitle">مجموعة مختارة من الألعاب الجماعية التفاعلية. صممت لتجمع الأصدقاء وتصنع الذكريات.</p>
+            <div class="status-pill">● متصل الآن</div>
+            <h1>بوابة ريشة للألعاب</h1>
+            <p class="subtitle">وجهتك الأولى للألعاب الجماعية التفاعلية. اختر لعبتك، شارك الرابط، وابدأ التحدي فوراً.</p>
         </header>
 
         <div class="games-grid">
             
             <a href="/mishnaqa" class="game-card">
-                <div class="icon-wrapper">😵</div>
+                <div class="icon-box">😵</div>
                 <h3 class="game-title">المشنقة</h3>
-                <p class="game-desc">أنقذ الموقف بتخمين الكلمة الصحيحة قبل اكتمال الرسم.</p>
-                <div class="play-btn">العب الآن</div>
+                <p class="game-desc">هل يمكنك تخمين الكلمة قبل فوات الأوان؟ تحدى ذكاءك اللغوي.</p>
+                <div class="play-link">
+                    <span>ابدا اللعب</span>
+                    <span class="arrow">←</span>
+                </div>
             </a>
 
             <a href="/HROF-GAME" class="game-card">
-                <div class="icon-wrapper">🅰️</div>
-                <h3 class="game-title">تحدي الحروف</h3>
-                <p class="game-desc">كن الأسرع في إيجاد كلمات تبدأ بالحرف المطلوب.</p>
-                <div class="play-btn">العب الآن</div>
+                <div class="icon-box">🅰️</div>
+                <h3 class="game-title">لعبة الحروف</h3>
+                <p class="game-desc">سرعة بديهة وكلمات، من الأسرع في إيجاد الكلمات بالحرف المطلوب؟</p>
+                <div class="play-link">
+                    <span>ابدا اللعب</span>
+                    <span class="arrow">←</span>
+                </div>
             </a>
 
             <a href="/tictak_ultimate" class="game-card">
-                <div class="icon-wrapper">⭕</div>
-                <h3 class="game-title">إكس أو (X-O)</h3>
-                <p class="game-desc">الكلاسيكية الخالدة بتحدي جديد وممتع.</p>
-                <div class="play-btn">العب الآن</div>
+                <div class="icon-box">⭕</div>
+                <h3 class="game-title">Tic Tac Toe</h3>
+                <p class="game-desc">لعبة إكس أو الكلاسيكية بتحدي جديد وممتع.</p>
+                <div class="play-link">
+                    <span>ابدا اللعب</span>
+                    <span class="arrow">←</span>
+                </div>
             </a>
 
             <a href="/NeuSwalif" class="game-card">
-                <div class="icon-wrapper">💬</div>
+                <div class="icon-box">💬</div>
                 <h3 class="game-title">سوالف</h3>
-                <p class="game-desc">افتح مواضيع شيقة ومضحكة مع أصدقائك بضغطة زر.</p>
-                <div class="play-btn">العب الآن</div>
+                <p class="game-desc">مواضيع للنقاش لكسر الجليد وبدء محادثات ممتعة مع المجموعة.</p>
+                <div class="play-link">
+                    <span>ابدا اللعب</span>
+                    <span class="arrow">←</span>
+                </div>
             </a>
 
             <a href="/imposter" class="game-card">
-                <div class="icon-wrapper">🕵️</div>
+                <div class="icon-box">🕵️</div>
                 <h3 class="game-title">الجاسوس</h3>
-                <p class="game-desc">الكل يعرف المكان إلا واحد! اكتشف من هو الدخيل.</p>
-                <div class="play-btn">العب الآن</div>
+                <p class="game-desc">اكتشف من هو الدخيل المتخفي بينكم في لعبة الشك والذكاء.</p>
+                <div class="play-link">
+                    <span>ابدا اللعب</span>
+                    <span class="arrow">←</span>
+                </div>
             </a>
 
             <a href="/Question_Answer" class="game-card">
-                <div class="icon-wrapper">🧠</div>
+                <div class="icon-box">🧠</div>
                 <h3 class="game-title">سؤال وجواب</h3>
-                <p class="game-desc">اختبر ثقافتك العامة وتحدى معلوماتك الآن.</p>
-                <div class="play-btn">العب الآن</div>
+                <p class="game-desc">اختبر معلوماتك العامة وتحدى أصدقائك في مسابقة ثقافية.</p>
+                <div class="play-link">
+                    <span>ابدا اللعب</span>
+                    <span class="arrow">←</span>
+                </div>
             </a>
 
             <a href="/KalimaTac_N-Pixell" class="game-card">
-                <div class="icon-wrapper">🧩</div>
+                <div class="icon-box">🧩</div>
                 <h3 class="game-title">كلماتك</h3>
-                <p class="game-desc">لعبة تجميع وتخمين الكلمات بأسلوب البيكسل الممتع.</p>
-                <div class="play-btn">العب الآن</div>
+                <p class="game-desc">لعبة تخمين الكلمات وتجميعها بأسلوب ممتع وجديد.</p>
+                <div class="play-link">
+                    <span>ابدا اللعب</span>
+                    <span class="arrow">←</span>
+                </div>
             </a>
 
         </div>
@@ -306,8 +284,8 @@
 
     <footer>
         <p>© <span id="year"></span> جميع الحقوق محفوظة لمنصة <strong>ريشة للألعاب</strong>.</p>
-        <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.8;">
-            POWERED BY <a href="https://www.risha.digital" target="_blank">RISHA DIGITAL</a>
+        <p style="margin-top: 10px; opacity: 0.6;">
+            Powered by <a href="https://www.risha.digital" target="_blank">RISHA DIGITAL</a>
         </p>
     </footer>
 
