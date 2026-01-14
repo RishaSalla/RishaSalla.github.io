@@ -4,40 +4,69 @@
     <meta charset="UTF-8">
     <title>ريشة للألعاب | Risha Games</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="منصة ريشة للألعاب التفاعلية - العب، نافس، واستمتع.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-main: #020205;
-            --accent-cyan: #00fff2;
-            --accent-violet: #d400ff;
-            --glass-dark: rgba(10, 10, 25, 0.7);
-            --border-dim: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(0, 255, 242, 0.3);
+            /* لوحة الألوان الجديدة: الفراغ الرقمي (Digital Void) */
+            --bg-deep: #030305;       /* أسود حالك */
+            --bg-card: #0e0e14;       /* رمادي فحمي غامق */
+            --bg-card-hover: #161622;
+            
+            /* ألوان النيون (Accent Colors) */
+            --neon-primary: #6d28d9;  /* بنفسجي ملكي */
+            --neon-secondary: #06b6d4; /* تركواز كهربائي */
+            --neon-alert: #f43f5e;    /* وردي تحذيري */
+            
+            /* الحدود والإضاءة */
+            --border-subtle: rgba(255, 255, 255, 0.05);
+            --border-active: rgba(6, 182, 212, 0.5);
+            --glow-shadow: 0 0 20px rgba(109, 40, 217, 0.3);
+            
             --text-main: #ffffff;
-            --text-muted: #94a3b8;
+            --text-dim: #94a3b8;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; outline: none; }
 
         body {
-            background-color: var(--bg-main);
+            background-color: var(--bg-deep);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background: radial-gradient(circle at 50% 0%, rgba(212, 0, 255, 0.15), transparent 40%), linear-gradient(to bottom, #0a0a14, #020205);
+            overflow-x: hidden;
+            /* خلفية برمجية: شبكة متحركة */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: center top;
         }
 
-        /* --- الهيدر --- */
+        /* تأثير الإضاءة العلوية */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -150px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 300px;
+            background: radial-gradient(circle, rgba(109, 40, 217, 0.4) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- الهيدر الاحترافي --- */
         header {
-            background: rgba(2, 2, 5, 0.85);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border-dim);
-            padding: 20px 0;
+            background: rgba(3, 3, 5, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 25px 0;
             position: sticky; top: 0; z-index: 100;
         }
 
@@ -46,91 +75,301 @@
             display: flex; justify-content: space-between; align-items: center;
         }
 
-        .logo { font-size: 1.5rem; font-weight: 900; color: var(--text-main); }
-        .logo span { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0, 255, 242, 0.5); }
-        .nav-status { font-size: 0.85rem; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 50px; border: 1px solid var(--border-dim); }
-
-        /* --- المحتوى --- */
-        .main-container { width: 90%; max-width: 1200px; margin: 60px auto; flex: 1; }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+        }
         
-        .hero-text { text-align: center; margin-bottom: 40px; }
-        h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin-bottom: 15px; background: linear-gradient(to right, var(--text-main), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { color: var(--text-muted); font-size: 1.15rem; max-width: 650px; margin: 0 auto; line-height: 1.6; }
+        .logo svg { width: 28px; height: 28px; fill: var(--neon-secondary); }
+        .logo span { color: var(--neon-secondary); }
 
-        /* --- بانر المتجر --- */
-        .store-cta-banner {
-            background: linear-gradient(90deg, rgba(212, 0, 255, 0.05), rgba(0, 255, 242, 0.05));
-            border: 1px solid var(--border-dim); border-right: 3px solid var(--accent-cyan); border-left: 3px solid var(--accent-violet);
-            border-radius: 16px; padding: 25px 35px; margin-bottom: 50px;
-            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+        .beta-badge {
+            font-size: 0.75rem;
+            color: var(--neon-secondary);
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        .store-cta-text p { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
-        .store-cta-text span { font-size: 0.9rem; color: var(--accent-cyan); }
-        .store-btn {
-            background: linear-gradient(135deg, var(--accent-violet), var(--accent-cyan)); color: #000; font-weight: 800; padding: 12px 30px; border-radius: 50px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s;
+
+        /* --- المحتوى الرئيسي --- */
+        .main-container {
+            width: 90%; max-width: 1200px; margin: 60px auto; flex: 1; position: relative;
         }
-        .store-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 255, 242, 0.4); }
-        .store-btn svg { width: 20px; height: 20px; }
 
-        /* --- الشبكة --- */
-        .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
 
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            /* نص متدرج احترافي */
+            background: linear-gradient(135deg, #fff 40%, var(--neon-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* --- بانر المتجر (Cyberpunk Style) --- */
+        .store-cta {
+            background: linear-gradient(90deg, #0e0e14 0%, #13131f 100%);
+            border: 1px solid var(--border-subtle);
+            border-right: 4px solid var(--neon-primary); /* لمسة فنية */
+            border-radius: 12px;
+            padding: 30px 40px;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        /* تأثيرات خلفية خفيفة للبانر */
+        .store-cta::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(109, 40, 217, 0.03) 10px, rgba(109, 40, 217, 0.03) 20px);
+            pointer-events: none;
+        }
+
+        .cta-content h3 { color: var(--text-main); font-size: 1.3rem; font-weight: 700; margin-bottom: 5px; }
+        .cta-content p { color: var(--text-dim); font-size: 0.95rem; }
+
+        .cta-btn {
+            background: var(--text-main);
+            color: #000;
+            padding: 14px 32px;
+            border-radius: 6px; /* حواف حادة قليلاً للاحترافية */
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        /* --- شبكة الألعاب --- */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* --- كرت اللعبة (The Tech Card) --- */
         .game-card {
-            background: var(--glass-dark); border: 1px solid var(--border-dim); border-radius: 24px; padding: 35px 25px;
-            text-decoration: none; transition: 0.4s; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* سنترنا المحتوى */
+            text-align: center;
+            overflow: hidden;
         }
-        .game-card.active:hover { transform: translateY(-10px); border-color: var(--border-glow); box-shadow: 0 15px 40px -10px rgba(0, 255, 242, 0.2); }
-        
-        .game-icon { font-size: 4rem; margin-bottom: 20px; transition: 0.4s; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); }
-        .game-card.active:hover .game-icon { transform: scale(1.1) rotate(-5deg); filter: drop-shadow(0 0 20px var(--accent-violet)); }
-        
-        .game-title { color: var(--text-main); font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
-        .game-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px; line-height: 1.6; }
-        
-        .action-btn { margin-top: auto; padding: 12px 35px; border-radius: 50px; font-weight: 800; width: 100%; transition: 0.3s; }
-        .game-card.active .action-btn { background: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
-        .game-card.active:hover .action-btn { background: var(--accent-cyan); color: #000; box-shadow: 0 0 30px var(--accent-cyan); }
 
-        .game-card.disabled { opacity: 0.5; pointer-events: none; background: rgba(5, 5, 10, 0.6); }
-        .game-card.disabled .action-btn { border: 1px solid var(--border-dim); color: var(--text-muted); }
-        .coming-soon-badge { position: absolute; top: 20px; left: 20px; background: rgba(255, 255, 255, 0.05); padding: 5px 15px; border-radius: 50px; font-size: 0.75rem; color: var(--text-muted); border: 1px solid var(--border-dim); }
+        /* الخلفية التفاعلية عند الهوفر */
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
 
-        /* --- الفوتر الاحترافي --- */
+        .game-card:hover::before { opacity: 1; }
+
+        .game-card.active:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.7);
+        }
+
+        /* --- أيقونات SVG المرسومة بالكود --- */
+        .icon-container {
+            width: 80px; height: 80px;
+            margin-bottom: 25px;
+            display: flex; justify-content: center; align-items: center;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            transition: 0.4s;
+        }
+
+        .game-card.active:hover .icon-container {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: var(--neon-secondary);
+            transform: scale(1.1);
+        }
+        
+        .game-card.active:hover .icon-container svg {
+            stroke: var(--neon-secondary);
+            filter: drop-shadow(0 0 8px var(--neon-secondary));
+        }
+
+        /* إعدادات SVG العامة */
+        .game-icon-svg {
+            width: 40px; height: 40px;
+            stroke: var(--text-dim);
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round; stroke-linejoin: round;
+            transition: 0.4s;
+        }
+
+        /* تفاصيل النصوص */
+        .game-title {
+            color: var(--text-main);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .game-desc {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            flex-grow: 1; /* لتوحيد أطوال البطاقات */
+        }
+
+        /* الزر السفلي */
+        .play-indicator {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            display: flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+            padding-bottom: 5px;
+            border-bottom: 1px solid transparent;
+        }
+
+        .game-card.active:hover .play-indicator {
+            color: var(--neon-secondary);
+            border-color: var(--neon-secondary);
+        }
+
+        /* --- البطاقات المغلقة --- */
+        .game-card.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: rgba(14, 14, 20, 0.4); /* شفاف أكثر */
+        }
+        .game-card.disabled .icon-container { opacity: 0.5; }
+        .game-card.disabled .play-indicator { display: none; }
+        
+        .locked-badge {
+            position: absolute; top: 20px; right: 20px;
+            display: flex; align-items: center; gap: 5px;
+            font-size: 0.7rem; color: var(--text-dim);
+            background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 4px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* --- الفوتر --- */
         footer {
-            background: #010103; border-top: 1px solid var(--border-dim); padding: 60px 0 30px; margin-top: 80px; text-align: center;
+            margin-top: 80px;
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border-subtle);
+            background: #020203;
         }
-        .footer-content { width: 90%; max-width: 1000px; margin: 0 auto; }
-        
-        .footer-legal-text { color: #64748b; font-size: 0.85rem; line-height: 1.8; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
-        
-        .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
-        .footer-links button { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; transition: 0.3s; font-family: 'Cairo', sans-serif; border-bottom: 1px solid transparent; }
-        .footer-links button:hover { color: var(--accent-cyan); border-bottom-color: var(--accent-cyan); }
-        
-        .copy-right { color: #475569; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; }
-        .copy-right a { color: var(--accent-cyan); text-decoration: none; transition: 0.3s; }
-        .copy-right a:hover { color: var(--accent-violet); }
 
-        /* --- النوافذ المنبثقة (Modals) --- */
+        .footer-links {
+            display: flex; justify-content: center; gap: 30px; margin-bottom: 30px;
+        }
+
+        .footer-links button {
+            background: none; border: none;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .footer-links button:hover { color: var(--text-main); }
+
+        .legal-block {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #52525b;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #52525b;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+        .copyright a { color: var(--text-dim); text-decoration: none; font-weight: 700; transition: 0.3s; }
+        .copyright a:hover { color: var(--neon-secondary); }
+
+        /* --- المودال (النوافذ المنبثقة) --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px);
             z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px;
         }
-        .modal-box {
-            background: #0f111a; border: 1px solid var(--border-dim); border-radius: 16px;
-            width: 100%; max-width: 600px; max-height: 80vh; overflow-y: auto;
-            padding: 30px; position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.5);
-        }
-        .close-modal {
-            position: absolute; top: 20px; left: 20px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;
-        }
-        .modal-title { color: var(--accent-cyan); margin-bottom: 20px; font-size: 1.4rem; font-weight: 800; border-bottom: 1px solid var(--border-dim); padding-bottom: 15px; }
-        .modal-text { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; text-align: right; }
-        .modal-text p { margin-bottom: 15px; }
+        .modal-overlay.open { display: flex; animation: fadeIn 0.3s ease; }
         
-        /* تفعيل ظهور النافذة */
-        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            width: 100%; max-width: 600px; max-height: 80vh; overflow-y: auto;
+            padding: 40px; position: relative;
+            box-shadow: 0 0 60px rgba(0,0,0,0.8);
+        }
+        
+        .close-modal {
+            position: absolute; top: 20px; left: 20px;
+            background: none; border: none; color: var(--text-dim);
+            font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+        }
+        .close-modal:hover { color: var(--neon-alert); transform: rotate(90deg); }
+
+        .modal-title { color: var(--text-main); font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 15px; }
+        .modal-text p { color: var(--text-dim); margin-bottom: 15px; line-height: 1.8; font-size: 0.95rem; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     </style>
 </head>
@@ -138,68 +377,142 @@
 
     <header>
         <div class="header-content">
-            <div class="logo">RISHA SA <span>GAMES</span></div>
-            <div class="nav-status">BETA</div>
+            <div class="logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg>
+                RISHA SA <span>GAMES</span>
+            </div>
+            <div class="beta-badge">BETA 2.0</div>
         </div>
     </header>
 
     <div class="main-container">
         
-        <div class="hero-text">
-            <h1>ساحة الألعاب التفاعلية</h1>
-            <p class="subtitle">اختر لعبتك المفضلة وابدأ التحدي فوراً مع أصدقائك في بيئة حماسية.</p>
+        <div class="hero-section">
+            <h1>منصة التحديات الرقمية</h1>
+            <p class="subtitle">بيئة تفاعلية صُممت للمنافسة. اختر مسارك، تحدى أصدقاءك، واصنع لحظات لا تُنسى.</p>
         </div>
 
-        <div class="store-cta-banner">
-            <div class="store-cta-text">
-                <p>أعجبتك الألعاب؟ احصل على نسختك الخاصة الآن!</p>
-                <span>امتلك تحكم كامل بالألعاب ونظم مسابقاتك الخاصة.</span>
+        <div class="store-cta">
+            <div class="cta-content">
+                <h3>تريد تنظيم بطولة خاصة؟</h3>
+                <p>احصل على النسخ الكاملة للألعاب مع لوحة تحكم شاملة لإدارة فعالياتك.</p>
             </div>
-            <a href="https://risha.sa/ar/category/EpOznK" target="_blank" class="store-btn">
-                احصل على اللعبة
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+            <a href="https://risha.sa/ar/category/EpOznK" target="_blank" class="cta-btn">
+                <span>اذهب للمتجر</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
         </div>
 
-        <div class="games-grid">
+        <div class="games-grid" id="grid">
+
             <a href="/mishnaqa" class="game-card active">
-                <div class="game-icon">🪢</div>
+                <div class="icon-container">
+                    <svg class="game-icon-svg" viewBox="0 0 24 24">
+                        <path d="M18 21H6"/> <path d="M12 21V3"/> <path d="M12 3H16v4"/> <circle cx="16" cy="9" r="2"/> <path d="M16 11v4"/> </svg>
+                </div>
                 <h3 class="game-title">المشنقة</h3>
-                <p class="game-desc">خمن الكلمة وأنقذ الموقف قبل فوات الأوان.</p>
-                <div class="action-btn">العب الآن</div>
-            </a>
-            <a href="/HROF-GAME" class="game-card active">
-                <div class="game-icon">🅰️</div>
-                <h3 class="game-title">لعبة الحروف</h3>
-                <p class="game-desc">سباق السرعة والكلمات، من الأسرع؟</p>
-                <div class="action-btn">العب الآن</div>
+                <p class="game-desc">أنقذ الموقف بذكائك اللغوي قبل اكتمال الرسم.</p>
+                <div class="play-indicator">
+                    ابدأ اللعب <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
             </a>
 
-            <div class="game-card disabled"><span class="coming-soon-badge">قريباً</span><div class="game-icon">⭕</div><h3 class="game-title">حسبتاك</h3><p class="game-desc">تحدي إكس أو الكلاسيكي.</p><div class="action-btn">قريباً</div></div>
-            <div class="game-card disabled"><span class="coming-soon-badge">قريباً</span><div class="game-icon">💬</div><h3 class="game-title">سوالف</h3><p class="game-desc">مواضيع للنقاش.</p><div class="action-btn">قريباً</div></div>
-            <div class="game-card disabled"><span class="coming-soon-badge">قريباً</span><div class="game-icon">🕵️</div><h3 class="game-title">المحتال</h3><p class="game-desc">اكتشف الدخيل.</p><div class="action-btn">قريباً</div></div>
-            <div class="game-card disabled"><span class="coming-soon-badge">قريباً</span><div class="game-icon">🧠</div><h3 class="game-title">سؤال وجواب</h3><p class="game-desc">اختبر معلوماتك.</p><div class="action-btn">قريباً</div></div>
-            <div class="game-card disabled"><span class="coming-soon-badge">قريباً</span><div class="game-icon">🧩</div><h3 class="game-title">كلمتاك</h3><p class="game-desc">تجميع الكلمات.</p><div class="action-btn">قريباً</div></div>
+            <a href="/HROF-GAME" class="game-card active">
+                <div class="icon-container">
+                    <svg class="game-icon-svg" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="7" height="7" rx="1"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1"/>
+                        <path d="M3 14h7v7H3z"/>
+                    </svg>
+                </div>
+                <h3 class="game-title">حروف وسرعة</h3>
+                <p class="game-desc">المنافسة الأسرع لاستخراج الكلمات.</p>
+                <div class="play-indicator">
+                    ابدأ اللعب <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+            </a>
+
+            <div class="game-card disabled">
+                <div class="locked-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> قريباً</div>
+                <div class="icon-container">
+                    <svg class="game-icon-svg" viewBox="0 0 24 24">
+                        <path d="M3 9h18M3 15h18"/>
+                        <path d="M9 3v18M15 3v18"/>
+                    </svg>
+                </div>
+                <h3 class="game-title">حسبتاك</h3>
+                <p class="game-desc">تحدي إكس أو الاستراتيجي الكلاسيكي.</p>
+            </div>
+
+            <div class="game-card disabled">
+                <div class="locked-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> قريباً</div>
+                <div class="icon-container">
+                    <svg class="game-icon-svg" viewBox="0 0 24 24">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                </div>
+                <h3 class="game-title">سوالف</h3>
+                <p class="game-desc">محرك للحوارات والنقاشات الجماعية.</p>
+            </div>
+
+            <div class="game-card disabled">
+                <div class="locked-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> قريباً</div>
+                <div class="icon-container">
+                    <svg class="game-icon-svg" viewBox="0 0 24 24">
+                        <path d="M3 10a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <line x1="8" y1="18" x2="8" y2="18"/>
+                        <line x1="16" y1="18" x2="16" y2="18"/>
+                        <path d="M12 14v4"/>
+                    </svg>
+                </div>
+                <h3 class="game-title">المحتال</h3>
+                <p class="game-desc">لعبة الشك والتمويه. من هو الدخيل؟</p>
+            </div>
+
+            <div class="game-card disabled">
+                <div class="locked-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> قريباً</div>
+                <div class="icon-container">
+                    <svg class="game-icon-svg" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                </div>
+                <h3 class="game-title">سؤال وجواب</h3>
+                <p class="game-desc">بنك المعلومات والتحدي الثقافي.</p>
+            </div>
+
+            <div class="game-card disabled">
+                <div class="locked-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> قريباً</div>
+                <div class="icon-container">
+                    <svg class="game-icon-svg" viewBox="0 0 24 24">
+                        <path d="M19.439 15.424a1 1 0 0 0-1.026-.145A3.13 3.13 0 0 1 17 15.5a3.13 3.13 0 0 1-2.924-2.072 1 1 0 0 0-1.428-.535 3.13 3.13 0 0 1-3.296 0 1 1 0 0 0-1.428.535A3.13 3.13 0 0 1 5 15.5a3.13 3.13 0 0 1-1.413-.221 1 1 0 0 0-1.026.145l-1.38 1.38a2 2 0 0 0 0 2.828l1.38 1.38a1 1 0 0 0 1.414 0l1.38-1.38a1 1 0 0 1 1.414 0l1.38 1.38a1 1 0 0 0 1.414 0l1.38-1.38a1 1 0 0 1 1.414 0l1.38 1.38a1 1 0 0 0 1.414 0l1.38-1.38a2 2 0 0 0 0-2.828l-1.38-1.38z"/>
+                        <path d="M14.5 9a2.5 2.5 0 1 0-5 0V9a2.5 2.5 0 0 0 5 0z"/>
+                    </svg>
+                </div>
+                <h3 class="game-title">كلمتاك</h3>
+                <p class="game-desc">تركيب الكلمات والمعاني المتقاطعة.</p>
+            </div>
+
         </div>
     </div>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <button onclick="openModal('terms')">شروط الاستخدام</button>
-                <button onclick="openModal('privacy')">سياسة الخصوصية</button>
-                <button onclick="openModal('license')">ترخيص الاستخدام</button>
-            </div>
-            
-            <p class="footer-legal-text">
-                جميع الحقوق محفوظة © <span id="year"></span> لمنصة ريشة للألعاب، إحدى مشاريع Risha sa. 
-                المحتوى والأكواد البرمجية محمية بموجب قوانين الملكية الفكرية. يُمنع النسخ، الهندسة العكسية، أو الاستخدام التجاري دون ترخيص كتابي مسبق. 
-                استخدامك للموقع يعني الموافقة الضمنية على السياسات المذكورة.
-            </p>
+        <div class="footer-links">
+            <button onclick="openModal('terms')">شروط الاستخدام</button>
+            <button onclick="openModal('privacy')">سياسة الخصوصية</button>
+            <button onclick="openModal('license')">الحقوق والملكية</button>
+        </div>
+        
+        <p class="legal-block">
+            جميع الحقوق محفوظة لمنصة ريشة للألعاب. يمنع نسخ التصميم أو الكود المصدري.
+            <br>
+            المحتوى محمي بموجب قوانين الملكية الفكرية. © <span id="year"></span>
+        </p>
 
-            <div class="copy-right">
-                POWERED BY <a href="https://www.risha.sa" target="_blank">RISHA sa</a>
-            </div>
+        <div class="copyright">
+            POWERED BY <a href="https://www.risha.sa" target="_blank">RISHA SA</a>
         </div>
     </footer>
 
@@ -208,9 +521,9 @@
             <button class="close-modal" onclick="closeModal()">✕</button>
             <h3 class="modal-title">شروط الاستخدام</h3>
             <div class="modal-text">
-                <p><strong>1. القبول بالشروط:</strong> بزيارتك لهذا الموقع، فإنك توافق على الالتزام بهذه الشروط.</p>
-                <p><strong>2. الاستخدام المسموح:</strong> الألعاب متاحة للاستخدام الشخصي والترفيهي فقط. يُمنع استخدام المنصة لأغراض تجارية أو إعادة بيع الوصول إليها دون إذن.</p>
-                <p><strong>3. إخلاء المسؤولية:</strong> يتم تقديم الألعاب "كما هي". نحن نسعى لضمان استقرار الخدمة، لكننا لا نتحمل مسؤولية أي انقطاع مفاجئ أو أخطاء تقنية.</p>
+                <p>1. الاستخدام الشخصي: المنصة مخصصة للاستخدام الترفيهي الشخصي.</p>
+                <p>2. الملكية: لا يحق للمستخدم إعادة بيع الوصول للخدمة.</p>
+                <p>3. المسؤولية: نحن غير مسؤولين عن سوء الاستخدام من قبل اللاعبين.</p>
             </div>
         </div>
     </div>
@@ -220,9 +533,8 @@
             <button class="close-modal" onclick="closeModal()">✕</button>
             <h3 class="modal-title">سياسة الخصوصية</h3>
             <div class="modal-text">
-                <p><strong>1. البيانات التي نجمعها:</strong> نحن لا نقوم بجمع أي بيانات شخصية (مثل الاسم أو البريد الإلكتروني) أثناء اللعب المجاني.</p>
-                <p><strong>2. ملفات الارتباط (Cookies):</strong> نستخدم ملفات تعريف ارتباط بسيطة جداً لغرض تحسين تجربة اللعب وحفظ تقدمك مؤقتاً داخل المتصفح.</p>
-                <p><strong>3. الأطراف الثالثة:</strong> نحن لا نشارك أي معلومات مع أطراف خارجية لأغراض إعلانية.</p>
+                <p>1. البيانات: لا نجمع بيانات شخصية أثناء اللعب المجاني.</p>
+                <p>2. الكوكيز: نستخدمها فقط لحفظ إعدادات اللعبة محلياً.</p>
             </div>
         </div>
     </div>
@@ -230,11 +542,10 @@
     <div id="modal-license" class="modal-overlay">
         <div class="modal-box">
             <button class="close-modal" onclick="closeModal()">✕</button>
-            <h3 class="modal-title">ترخيص الاستخدام والملكية الفكرية</h3>
+            <h3 class="modal-title">ترخيص الاستخدام</h3>
             <div class="modal-text">
-                <p><strong>1. حقوق الملكية:</strong> جميع الأكواد البرمجية، التصاميم الجرافيكية، والأفكار في هذا الموقع هي ملكية حصرية لشركة Risha sa.</p>
-                <p><strong>2. الحظر:</strong> يُمنع منعاً باتاً نسخ الكود المصدري، أو محاولة استنساخ الألعاب، أو استخدام الهوية البصرية للمنصة في مشاريع أخرى.</p>
-                <p><strong>3. الاستفسارات:</strong> للحصول على ترخيص تجاري أو شراء نسخة من الألعاب، يرجى التواصل معنا عبر الموقع الرسمي.</p>
+                <p>جميع الحقوق محفوظة لشركة Risha SA. الكود والتصميم ملكية حصرية.</p>
+                <p>للحصول على ترخيص تجاري، يرجى التواصل معنا عبر الموقع الرسمي.</p>
             </div>
         </div>
     </div>
@@ -242,22 +553,30 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // وظائف النوافذ المنبثقة
+        // التفاعل مع حركة الماوس لتأثير الإضاءة
+        document.getElementById('grid').onmousemove = e => {
+            for(const card of document.getElementsByClassName("game-card")) {
+                const rect = card.getBoundingClientRect(),
+                      x = e.clientX - rect.left,
+                      y = e.clientY - rect.top;
+
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            }
+        };
+
         function openModal(type) {
             document.getElementById('modal-' + type).classList.add('open');
-            document.body.style.overflow = 'hidden'; // منع التمرير في الخلفية
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
-            document.body.style.overflow = 'auto'; // إعادة التمرير
+            document.body.style.overflow = 'auto';
         }
-
-        // إغلاق النافذة عند الضغط خارج المربع
-        document.querySelectorAll('.modal-overlay').forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) closeModal();
-            });
+        
+        document.querySelectorAll('.modal-overlay').forEach(m => {
+            m.addEventListener('click', e => { if(e.target === m) closeModal(); });
         });
     </script>
 </body>
