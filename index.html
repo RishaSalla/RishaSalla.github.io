@@ -2,352 +2,198 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>ريشة للألعاب | Risha Games</title>
+    <title>منصة ريشة | Risha Platform</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+
+    <link rel="stylesheet" href="style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            /* لوحة ألوان آبل الليلية (Apple Dark Mode Palette) */
-            --ios-bg: #000000;
-            --ios-card: rgba(28, 28, 30, 0.65); /* زجاج شبه شفاف */
-            --ios-card-border: rgba(255, 255, 255, 0.12);
-            --ios-blue: #0A84FF;
-            --ios-gray-text: #8E8E93;
-            --ios-white: #FFFFFF;
-            --blur-amount: 25px;
-            --radius: 22px; /* انحناء زوايا الآيفون */
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            background-color: var(--ios-bg);
-            color: var(--ios-white);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            font-smooth: always;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- الخلفية الحية (Aurora Background) --- */
-        .ambient-light {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: radial-gradient(circle at 50% -20%, #1c1c50 0%, #000000 60%);
-            overflow: hidden;
-        }
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4;
-            animation: float 20s infinite alternate ease-in-out;
-        }
-        .orb-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #2f2f8a; animation-delay: 0s; }
-        .orb-2 { top: 20%; right: -20%; width: 400px; height: 400px; background: #0a84ff; animation-delay: -5s; opacity: 0.2; }
-        
-        @keyframes float { 0% { transform: translate(0,0); } 100% { transform: translate(30px, 50px); } }
-
-        /* --- الهيدر (Glass Header) --- */
-        header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 0.5px solid var(--ios-card-border);
-            padding: 18px 0;
-        }
-
-        .header-container {
-            width: 88%; max-width: 1200px; margin: 0 auto;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .logo { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
-        .logo svg { width: 24px; fill: var(--ios-white); }
-        .beta-tag {
-            font-size: 0.7rem; font-weight: 700; color: #000;
-            background: var(--ios-white); padding: 4px 10px; border-radius: 50px;
-        }
-
-        /* --- المحتوى الرئيسي --- */
-        .main-content { width: 88%; max-width: 1200px; margin: 40px auto; flex: 1; }
-
-        .hero { text-align: center; margin-bottom: 50px; }
-        h1 {
-            font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 15px;
-            background: linear-gradient(180deg, #FFFFFF 0%, #b0b0b0 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .subtitle { color: var(--ios-gray-text); font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.5; }
-
-        /* --- بانر "فعّل نسختك" (Apple Card Style) --- */
-        .apple-card-cta {
-            background: rgba(28, 28, 30, 0.5);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            border: 1px solid var(--ios-card-border);
-            border-radius: var(--radius);
-            padding: 25px;
-            margin-bottom: 50px;
-            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
-            transition: 0.3s;
-        }
-        .apple-card-cta:hover { border-color: rgba(255,255,255,0.3); transform: scale(1.01); }
-
-        .cta-text h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; color: var(--ios-white); }
-        .cta-text p { font-size: 0.9rem; color: var(--ios-gray-text); }
-
-        .cta-button {
-            background: var(--ios-white); color: #000;
-            padding: 12px 24px; border-radius: 50px;
-            font-weight: 700; font-size: 0.9rem; text-decoration: none;
-            display: inline-flex; align-items: center; gap: 8px; transition: 0.3s;
-        }
-        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,255,255,0.2); }
-
-        /* --- الشبكة (Bento Grid) --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        /* --- تصميم البطاقة الزجاجي --- */
-        .glass-card {
-            background: var(--ios-card);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--ios-card-border);
-            border-radius: var(--radius);
-            padding: 30px;
-            text-decoration: none;
-            position: relative; overflow: hidden;
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        /* تأثير اللمعان عند التحريك */
-        .glass-card::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
-            transform: translateX(-100%); transition: 0.6s;
-        }
-        .glass-card:hover::after { transform: translateX(100%); }
-
-        .glass-card.active:hover {
-            transform: translateY(-8px);
-            background: rgba(44, 44, 46, 0.7);
-            border-color: rgba(255,255,255,0.3);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        /* أيقونات SVG */
-        .icon-box {
-            width: 70px; height: 70px; margin-bottom: 20px;
-            display: flex; justify-content: center; align-items: center;
-            background: rgba(255,255,255,0.05); border-radius: 18px;
-            transition: 0.4s;
-        }
-        .icon-svg { width: 35px; height: 35px; fill: var(--ios-white); transition: 0.4s; }
-        
-        .glass-card.active:hover .icon-box { background: var(--ios-white); transform: scale(1.1); }
-        .glass-card.active:hover .icon-svg { fill: #000; }
-
-        .card-title { color: var(--ios-white); font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
-        .card-desc { color: var(--ios-gray-text); font-size: 0.9rem; line-height: 1.5; margin-bottom: 25px; flex-grow: 1; }
-
-        .action-label {
-            font-size: 0.9rem; font-weight: 600; color: var(--ios-blue);
-            display: flex; align-items: center; gap: 5px; opacity: 0.8; transition: 0.3s;
-        }
-        .glass-card.active:hover .action-label { opacity: 1; gap: 10px; }
-
-        /* --- البطاقات المغلقة --- */
-        .glass-card.locked {
-            opacity: 0.6; cursor: default;
-            background: rgba(20, 20, 20, 0.4);
-        }
-        .glass-card.locked .icon-box { background: rgba(255,255,255,0.02); }
-        .glass-card.locked .icon-svg { fill: var(--ios-gray-text); }
-        .glass-card.locked .card-title, .glass-card.locked .card-desc { color: #555; }
-        
-        .lock-badge {
-            position: absolute; top: 20px; right: 20px;
-            background: rgba(0,0,0,0.4); padding: 5px 12px; border-radius: 50px;
-            font-size: 0.75rem; color: var(--ios-gray-text); border: 1px solid rgba(255,255,255,0.05);
-            display: flex; align-items: center; gap: 4px;
-        }
-
-        /* --- الفوتر --- */
-        footer {
-            margin-top: auto; padding: 50px 0; border-top: 1px solid var(--ios-card-border);
-            background: rgba(0,0,0,0.3); text-align: center;
-        }
-        .footer-nav { display: flex; justify-content: center; gap: 25px; margin-bottom: 25px; }
-        .footer-nav button {
-            background: none; border: none; color: var(--ios-gray-text); cursor: pointer; font-size: 0.9rem; transition: 0.3s;
-        }
-        .footer-nav button:hover { color: var(--ios-white); }
-        .copyright { font-size: 0.8rem; color: #444; }
-        .copyright a { color: #666; text-decoration: none; font-weight: 700; }
-
-        /* --- النوافذ المنبثقة (Modals) --- */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px;
-        }
-        .modal-overlay.open { display: flex; animation: fadeUp 0.3s ease; }
-        .modal-content {
-            background: #1c1c1e; width: 100%; max-width: 500px; padding: 30px; border-radius: 20px;
-            border: 1px solid var(--ios-card-border); position: relative;
-        }
-        .modal-header { font-size: 1.4rem; font-weight: 700; margin-bottom: 20px; color: var(--ios-white); }
-        .modal-body p { color: var(--ios-gray-text); margin-bottom: 10px; font-size: 0.95rem; line-height: 1.6; }
-        .close-btn { position: absolute; top: 20px; left: 20px; background: #3a3a3c; border: none; width: 30px; height: 30px; border-radius: 50%; color: #fff; cursor: pointer; }
-
-        @keyframes fadeUp { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-    </style>
 </head>
 <body>
 
-    <div class="ambient-light">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
+    <div id="preloader">
+        <div class="loader-content">
+            <svg class="loader-logo" viewBox="0 0 100 100">
+                <path class="draw-path" d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="#fff" stroke-width="2"/>
+                <path class="draw-feather" d="M80,20 C80,20 30,30 30,80 C30,80 50,70 60,40 C60,40 70,30 80,20" fill="none" stroke="#0A84FF" stroke-width="3"/>
+            </svg>
+            <p>جاري تهيئة النظام...</p>
+        </div>
+    </div>
+
+    <div class="ambient-bg">
+        <div class="aurora-orb orb-1"></div>
+        <div class="aurora-orb orb-2"></div>
     </div>
 
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <svg viewBox="0 0 24 24"><path d="M21.4 7.5C22.2 8.6 22.5 9.9 22 11.2C21.6 12.2 20.8 13.5 19.8 14.9C18.4 16.9 16.8 19.3 14.5 19.3C12.3 19.3 11.6 17.9 9.1 17.9C6.5 17.9 5.7 19.3 3.7 19.3C1.6 19.3 0.3 17.3 0.1 17.1C0.1 17 0 16.9 0 16.9C-0.7 14.6 1.6 11.2 1.7 11.2C3.5 9.4 3.6 7.5 3.7 7C3.9 4.8 5.6 3.1 7.7 3.1C8.8 3.1 9.8 3.8 10.5 3.8C11.1 3.8 12.5 2.9 14.3 3C15 3 17 3.2 18.5 4.8C18.6 4.9 18.4 5 18.3 5.1C16.8 6 16.5 8.1 16.5 8.3C16.5 10.3 18.2 11.7 18.3 11.8C18.4 11.9 18.4 11.8 18.5 11.8C19.7 10.1 21.4 7.5 21.4 7.5ZM14.2 2.9C15.1 1.8 15 0.7 15 0.5C14 0.5 12.8 1.1 12.1 2C11.3 2.9 11.4 4.1 11.4 4.1C12.4 4.2 13.5 3.7 14.2 2.9Z"/></svg>
-                RISHA
+        <div class="header-inner">
+            <div class="brand">
+                <svg class="brand-icon" viewBox="0 0 24 24"><path d="M21.4 7.5C22.2 8.6 22.5 9.9 22 11.2C21.6 12.2 20.8 13.5 19.8 14.9C18.4 16.9 16.8 19.3 14.5 19.3C12.3 19.3 11.6 17.9 9.1 17.9C6.5 17.9 5.7 19.3 3.7 19.3C1.6 19.3 0.3 17.3 0.1 17.1C0.1 17 0 16.9 0 16.9C-0.7 14.6 1.6 11.2 1.7 11.2C3.5 9.4 3.6 7.5 3.7 7C3.9 4.8 5.6 3.1 7.7 3.1C8.8 3.1 9.8 3.8 10.5 3.8C11.1 3.8 12.5 2.9 14.3 3C15 3 17 3.2 18.5 4.8C18.6 4.9 18.4 5 18.3 5.1C16.8 6 16.5 8.1 16.5 8.3C16.5 10.3 18.2 11.7 18.3 11.8C18.4 11.9 18.4 11.8 18.5 11.8C19.7 10.1 21.4 7.5 21.4 7.5Z"/></svg>
+                <div class="brand-text">RISHA <span>PLATFORM</span></div>
             </div>
-            <span class="beta-tag">BETA</span>
+            <div class="header-actions">
+                <a href="https://risha.sa/ar/category/EpOznK" target="_blank" class="glass-btn small">تفعيل النسخة</a>
+            </div>
         </div>
     </header>
 
-    <div class="main-content">
-        
-        <div class="hero">
-            <h1>ألعاب تفاعلية، بتجربة سينمائية.</h1>
-            <p class="subtitle">تصميم مستوحى من المستقبل. اختر لعبتك وابدأ المنافسة بأسلوب جديد كلياً.</p>
-        </div>
-
-        <div class="apple-card-cta">
-            <div class="cta-text">
-                <h3>فعّل نسختك الخاصة الآن</h3>
-                <p>احصل على أكواد الألعاب واكتشف مجموعتنا الكاملة من المنتجات الرقمية.</p>
-            </div>
-            <a href="https://risha.sa/ar/category/EpOznK" target="_blank" class="cta-button">
-                الحصول على الكود 
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-        </div>
-
-        <div class="grid">
-
-            <div class="glass-card locked">
-                <div class="lock-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C9.24 2 7 4.24 7 7v3H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2h-1V7c0-2.76-2.24-5-5-5zm3 8h-6V7c0-1.66 1.34-3 3-3s3 1.34 3 3v3z"/></svg> قريباً</div>
-                <div class="icon-box">
-                    <svg class="icon-svg" viewBox="0 0 24 24">
-                        <path d="M5 16L3 18v2h18v-2l-2-2h-1v-4a4 4 0 00-8 0v4H5z"/> <path d="M2 18h20" stroke="currentColor" stroke-width="1" fill="none"/> </svg>
-                </div>
-                <h3 class="card-title">المافيا</h3>
-                <p class="card-desc">من هو الزعيم المتخفي؟ لعبة الشك والغموض.</p>
-            </div>
-
-            <a href="/mishnaqa" class="glass-card active">
-                <div class="icon-box">
-                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                </div>
-                <h3 class="card-title">المشنقة</h3>
-                <p class="card-desc">تحدي الذكاء اللغوي. هل يمكنك النجاة؟</p>
-                <div class="action-label">العب الآن <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-            </a>
-
-            <a href="/HROF-GAME" class="glass-card active">
-                <div class="icon-box">
-                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                </div>
-                <h3 class="card-title">لعبة الحروف</h3>
-                <p class="card-desc">السرعة والبديهة في استحضار الكلمات.</p>
-                <div class="action-label">العب الآن <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-            </a>
-
-            <div class="glass-card locked">
-                <div class="lock-badge">قريباً</div>
-                <div class="icon-box"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 3h18v18H3z" fill="currentColor" opacity="0.3"/><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2"/></svg></div>
-                <h3 class="card-title">إكس أو</h3>
-                <p class="card-desc">التحدي الكلاسيكي.</p>
-            </div>
-
-            <div class="glass-card locked">
-                <div class="lock-badge">قريباً</div>
-                <div class="icon-box"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
-                <h3 class="card-title">سوالف</h3>
-                <p class="card-desc">مواضيع للنقاش.</p>
-            </div>
-
-            <div class="glass-card locked">
-                <div class="lock-badge">قريباً</div>
-                <div class="icon-box"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg></div>
-                <h3 class="card-title">سؤال وجواب</h3>
-                <p class="card-desc">اختبر معلوماتك.</p>
-            </div>
-
+    <div class="system-status">
+        <div class="status-indicator">
+            <span class="pulse-dot"></span>
+            <span class="status-text">النظام يعمل بكفاءة | تمت إضافة لعبة جديدة: المافيا (قريباً)</span>
         </div>
     </div>
 
-    <footer>
-        <div class="footer-nav">
-            <button onclick="openModal('terms')">الشروط</button>
-            <button onclick="openModal('privacy')">الخصوصية</button>
-            <button onclick="openModal('license')">الحقوق</button>
+    <main class="container">
+        
+        <div class="hero-section">
+            <h1>مساحتك الرقمية للعب.</h1>
+            <p class="subtitle">واجهة تفاعلية تجمع أصدقاءك. صُممت لتكون أكثر من مجرد لعبة، بل تجربة بصرية متكاملة.</p>
         </div>
-        <div class="copyright">
-            POWERED BY <a href="https://www.risha.sa" target="_blank">RISHA SA</a> © <span id="year"></span>
+
+        <div class="bento-grid">
+
+            <a href="#" class="game-card mafia-special locked" onclick="return false;">
+                <div class="card-glow"></div>
+                <div class="lock-badge">قريباً</div>
+                <div class="icon-wrapper">
+                    <svg viewBox="0 0 24 24" class="svg-icon">
+                        <path d="M5 16L3 18v2h18v-2l-2-2h-1v-4a4 4 0 00-8 0v4H5z" fill="currentColor"/>
+                        <path d="M12 10a2 2 0 100-4 2 2 0 000 4z" fill="currentColor" opacity="0.7"/>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>المافيا</h3>
+                    <p>من هو الزعيم المتخفي؟ لعبة الشك.</p>
+                </div>
+            </a>
+
+            <a href="/mishnaqa" class="game-card active-card" data-tilt>
+                <div class="icon-wrapper blue">
+                    <svg viewBox="0 0 24 24" class="svg-icon">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>المشنقة</h3>
+                    <p>أنقذ الموقف بذكائك.</p>
+                </div>
+                <div class="play-arrow">→</div>
+            </a>
+
+            <a href="/HROF-GAME" class="game-card active-card" data-tilt>
+                <div class="icon-wrapper purple">
+                    <svg viewBox="0 0 24 24" class="svg-icon">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor"/>
+                        <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>الحروف</h3>
+                    <p>السرعة والبديهة.</p>
+                </div>
+                <div class="play-arrow">→</div>
+            </a>
+
+            <div class="game-card locked compact">
+                <div class="lock-badge">قريباً</div>
+                <div class="icon-wrapper gray"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M3 3h18v18H3z" fill="currentColor" opacity="0.3"/><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2"/></svg></div>
+                <h3>إكس أو</h3>
+            </div>
+
+            <div class="game-card locked compact">
+                <div class="lock-badge">قريباً</div>
+                <div class="icon-wrapper gray"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="currentColor"/></svg></div>
+                <h3>سوالف</h3>
+            </div>
+
+            <div class="game-card locked compact">
+                <div class="lock-badge">قريباً</div>
+                <div class="icon-wrapper gray"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" fill="currentColor"/></svg></div>
+                <h3>سؤال وجواب</h3>
+            </div>
+
+            <div class="game-card locked compact">
+                <div class="lock-badge">قريباً</div>
+                <div class="icon-wrapper gray"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M19.439 15.424a1 1 0 0 0-1.026-.145A3.13 3.13 0 0 1 17 15.5a3.13 3.13 0 0 1-2.924-2.072 1 1 0 0 0-1.428-.535 3.13 3.13 0 0 1-3.296 0 1 1 0 0 0-1.428.535A3.13 3.13 0 0 1 5 15.5a3.13 3.13 0 0 1-1.413-.221 1 1 0 0 0-1.026.145l-1.38 1.38a2 2 0 0 0 0 2.828l1.38 1.38a1 1 0 0 0 1.414 0l1.38-1.38a1 1 0 0 1 1.414 0l1.38 1.38a1 1 0 0 0 1.414 0l1.38-1.38a1 1 0 0 1 1.414 0l1.38 1.38a1 1 0 0 0 1.414 0l1.38-1.38a2 2 0 0 0 0-2.828l-1.38-1.38z" fill="currentColor"/></svg></div>
+                <h3>كلماتك</h3>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            
+            <div class="trust-badge">
+                <a href="#" class="sbc-link" title="موثق لدى المركز السعودي للأعمال">
+                    <div class="sbc-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <div class="sbc-text">
+                        <span>موثق في</span>
+                        <strong>منصة الأعمال</strong>
+                    </div>
+                </a>
+            </div>
+
+            <div class="footer-links">
+                <button onclick="openModal('terms')">الشروط</button>
+                <button onclick="openModal('privacy')">الخصوصية</button>
+                <button onclick="openModal('license')">الحقوق</button>
+            </div>
+
+            <div class="payment-methods">
+                <div class="pay-icon mada" title="Mada">
+                    <svg viewBox="0 0 36 24"><rect width="36" height="24" rx="4" fill="#e0e0e0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">mada</text></svg>
+                </div>
+                <div class="pay-icon visa" title="Visa">
+                    <svg viewBox="0 0 36 24"><rect width="36" height="24" rx="4" fill="#e0e0e0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">VISA</text></svg>
+                </div>
+                <div class="pay-icon apple" title="Apple Pay">
+                    <svg viewBox="0 0 36 24"><rect width="36" height="24" rx="4" fill="#e0e0e0"/><path d="M18 10c0-1 .5-1.5 1-2-.5 0-1 .5-1 1s.5 1.5 1 2z" fill="#333"/><text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-size="6" font-weight="bold" fill="#333">Pay</text></svg>
+                </div>
+            </div>
+
+            <div class="copy-right">
+                <p>إحدى منتجات <a href="https://risha.sa" target="_blank">RISHA PLATFORM</a> الرقمية © <span id="year"></span></p>
+            </div>
         </div>
     </footer>
 
     <div id="modal-terms" class="modal-overlay">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">✕</button>
-            <div class="modal-header">شروط الاستخدام</div>
+            <div class="modal-header">شروط الاستخدام <button class="close-btn" onclick="closeModal()">✕</button></div>
             <div class="modal-body">
-                <p>1. الاستخدام الشخصي: الألعاب مخصصة للترفيه الشخصي.</p>
-                <p>2. إعادة البيع: يُمنع بيع الوصول للألعاب دون إذن.</p>
+                <p>مرحباً بك في موقع ريشة. يرجى العلم بأن هذا الموقع مخصص للترفيه والاستخدام الشخصي فقط. يُمنع منعاً باتاً استغلال الألعاب لأغراض تجارية أو إعادة بيعها دون إذن.</p>
             </div>
         </div>
     </div>
 
     <div id="modal-privacy" class="modal-overlay">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">✕</button>
-            <div class="modal-header">سياسة الخصوصية</div>
+            <div class="modal-header">سياسة الخصوصية <button class="close-btn" onclick="closeModal()">✕</button></div>
             <div class="modal-body">
-                <p>نحن لا نجمع أي بيانات شخصية أثناء اللعب. الخصوصية هي حق أساسي لك.</p>
+                <p>نحن نحترم خصوصيتك. موقع ريشة لا يقوم بجمع أو تخزين أي بيانات شخصية أو حساسة أثناء اللعب. بياناتك ملك لك وحدك.</p>
             </div>
         </div>
     </div>
 
     <div id="modal-license" class="modal-overlay">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">✕</button>
-            <div class="modal-header">حقوق الملكية</div>
+            <div class="modal-header">الحقوق والملكية <button class="close-btn" onclick="closeModal()">✕</button></div>
             <div class="modal-body">
-                <p>جميع الحقوق محفوظة لشركة Risha SA. التصميم والكود محمي بموجب القوانين.</p>
+                <p>جميع حقوق التصميم والبرمجة محفوظة لمنصة ريشة (Risha Platform). هذا الموقع محمي بموجب قوانين الملكية الفكرية. يُمنع النسخ أو الهندسة العكسية.</p>
             </div>
         </div>
     </div>
 
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        function openModal(id) { document.getElementById('modal-'+id).classList.add('open'); }
-        function closeModal() { document.querySelectorAll('.modal-overlay').forEach(el => el.classList.remove('open')); }
-        window.onclick = function(e) { if (e.target.classList.contains('modal-overlay')) closeModal(); }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
