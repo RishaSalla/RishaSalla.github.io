@@ -2,198 +2,184 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>منصة ريشة | Risha Platform</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#000000">
-
+    <title>ألعاب ريشة | Risha Games Arcade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="loader-content">
-            <svg class="loader-logo" viewBox="0 0 100 100">
-                <path class="draw-path" d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="#fff" stroke-width="2"/>
-                <path class="draw-feather" d="M80,20 C80,20 30,30 30,80 C30,80 50,70 60,40 C60,40 70,30 80,20" fill="none" stroke="#0A84FF" stroke-width="3"/>
-            </svg>
-            <p>جاري تهيئة النظام...</p>
-        </div>
-    </div>
-
-    <div class="ambient-bg">
-        <div class="aurora-orb orb-1"></div>
-        <div class="aurora-orb orb-2"></div>
+    <div id="loader">
+        <svg class="feather-draw" viewBox="0 0 100 100">
+            <rect x="10" y="10" width="80" height="80" fill="none" stroke="#fff" stroke-width="2" class="draw-rect"/>
+            <path d="M80 20 C 80 20, 30 30, 30 80 C 30 80, 50 70, 60 40 C 60 40, 70 30, 80 20" fill="none" stroke="#C8A165" stroke-width="3" class="draw-path"/>
+        </svg>
     </div>
 
     <header>
         <div class="header-inner">
-            <div class="brand">
-                <svg class="brand-icon" viewBox="0 0 24 24"><path d="M21.4 7.5C22.2 8.6 22.5 9.9 22 11.2C21.6 12.2 20.8 13.5 19.8 14.9C18.4 16.9 16.8 19.3 14.5 19.3C12.3 19.3 11.6 17.9 9.1 17.9C6.5 17.9 5.7 19.3 3.7 19.3C1.6 19.3 0.3 17.3 0.1 17.1C0.1 17 0 16.9 0 16.9C-0.7 14.6 1.6 11.2 1.7 11.2C3.5 9.4 3.6 7.5 3.7 7C3.9 4.8 5.6 3.1 7.7 3.1C8.8 3.1 9.8 3.8 10.5 3.8C11.1 3.8 12.5 2.9 14.3 3C15 3 17 3.2 18.5 4.8C18.6 4.9 18.4 5 18.3 5.1C16.8 6 16.5 8.1 16.5 8.3C16.5 10.3 18.2 11.7 18.3 11.8C18.4 11.9 18.4 11.8 18.5 11.8C19.7 10.1 21.4 7.5 21.4 7.5Z"/></svg>
-                <div class="brand-text">RISHA <span>PLATFORM</span></div>
+            <div class="logo-area">
+                <svg viewBox="0 0 24 24" class="logo-svg"><path d="M20 4C20 4 4 6 4 20C4 20 8 18 12 10C12 10 16 6 20 4Z" fill="currentColor"/></svg>
+                <div class="logo-text">ريشة <span>للألعاب</span></div>
             </div>
-            <div class="header-actions">
-                <a href="https://risha.sa/ar/category/EpOznK" target="_blank" class="glass-btn small">تفعيل النسخة</a>
-            </div>
+            
+            <nav class="top-nav">
+                <a href="https://risha.sa" class="nav-btn outline">الموقع الرئيسي</a>
+                <a href="https://risha.sa/ar/category/EpOznK" target="_blank" class="nav-btn filled">شراء الأكواد</a>
+            </nav>
         </div>
     </header>
 
-    <div class="system-status">
-        <div class="status-indicator">
-            <span class="pulse-dot"></span>
-            <span class="status-text">النظام يعمل بكفاءة | تمت إضافة لعبة جديدة: المافيا (قريباً)</span>
-        </div>
-    </div>
+    <main>
+        <section class="hero-mafia">
+            <div class="mafia-content">
+                <span class="new-badge">جديد وحصري</span>
+                <h1>المافيا</h1>
+                <p>لعبة الشك والغموض.. هل يمكنك اكتشاف الزعيم قبل فوات الأوان؟</p>
+                
+                <a href="#" class="hero-btn disabled" onclick="return false;">
+                    قريباً
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                </a>
+            </div>
+            <div class="mafia-visual">
+                <svg viewBox="0 0 200 200" class="hat-svg">
+                    <path d="M20 120 L40 100 L160 100 L180 120 V140 H20 Z" fill="none" stroke="#C8A165" stroke-width="2"/>
+                    <path d="M60 100 V60 C60 60 60 40 100 40 C140 40 140 60 140 60 V100" fill="none" stroke="#C8A165" stroke-width="2"/>
+                </svg>
+            </div>
+        </section>
 
-    <main class="container">
-        
-        <div class="hero-section">
-            <h1>مساحتك الرقمية للعب.</h1>
-            <p class="subtitle">واجهة تفاعلية تجمع أصدقاءك. صُممت لتكون أكثر من مجرد لعبة، بل تجربة بصرية متكاملة.</p>
-        </div>
-
-        <div class="bento-grid">
-
-            <a href="#" class="game-card mafia-special locked" onclick="return false;">
-                <div class="card-glow"></div>
-                <div class="lock-badge">قريباً</div>
-                <div class="icon-wrapper">
-                    <svg viewBox="0 0 24 24" class="svg-icon">
-                        <path d="M5 16L3 18v2h18v-2l-2-2h-1v-4a4 4 0 00-8 0v4H5z" fill="currentColor"/>
-                        <path d="M12 10a2 2 0 100-4 2 2 0 000 4z" fill="currentColor" opacity="0.7"/>
-                    </svg>
-                </div>
-                <div class="card-info">
-                    <h3>المافيا</h3>
-                    <p>من هو الزعيم المتخفي؟ لعبة الشك.</p>
-                </div>
-            </a>
-
-            <a href="/mishnaqa" class="game-card active-card" data-tilt>
-                <div class="icon-wrapper blue">
-                    <svg viewBox="0 0 24 24" class="svg-icon">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="currentColor"/>
-                    </svg>
-                </div>
-                <div class="card-info">
-                    <h3>المشنقة</h3>
-                    <p>أنقذ الموقف بذكائك.</p>
-                </div>
-                <div class="play-arrow">→</div>
-            </a>
-
-            <a href="/HROF-GAME" class="game-card active-card" data-tilt>
-                <div class="icon-wrapper purple">
-                    <svg viewBox="0 0 24 24" class="svg-icon">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor"/>
-                        <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" fill="none" stroke-width="1.5"/>
-                    </svg>
-                </div>
-                <div class="card-info">
-                    <h3>الحروف</h3>
-                    <p>السرعة والبديهة.</p>
-                </div>
-                <div class="play-arrow">→</div>
-            </a>
-
-            <div class="game-card locked compact">
-                <div class="lock-badge">قريباً</div>
-                <div class="icon-wrapper gray"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M3 3h18v18H3z" fill="currentColor" opacity="0.3"/><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="2"/></svg></div>
-                <h3>إكس أو</h3>
+        <section class="games-arcade">
+            <div class="section-title">
+                <h2>اختر تحديك</h2>
+                <div class="line"></div>
             </div>
 
-            <div class="game-card locked compact">
-                <div class="lock-badge">قريباً</div>
-                <div class="icon-wrapper gray"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="currentColor"/></svg></div>
-                <h3>سوالف</h3>
-            </div>
+            <div class="grid">
+                
+                <a href="/mishnaqa" class="card">
+                    <div class="card-visual">
+                        <svg viewBox="0 0 64 64"><path d="M10 54h44M32 54V10M32 10h16v8m-4 14a4 4 0 1 1 8 0 4 4 0 0 1-8 0m4 4v10m-4-6l4 4 4-4m-4 4v4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <h3>المشنقة</h3>
+                        <span class="tag">ذكاء لغوي</span>
+                    </div>
+                </a>
 
-            <div class="game-card locked compact">
-                <div class="lock-badge">قريباً</div>
-                <div class="icon-wrapper gray"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" fill="currentColor"/></svg></div>
-                <h3>سؤال وجواب</h3>
-            </div>
+                <a href="/HROF-GAME" class="card">
+                    <div class="card-visual">
+                        <svg viewBox="0 0 64 64"><rect x="12" y="12" width="40" height="40" rx="4" fill="none" stroke="#fff" stroke-width="2"/><text x="32" y="42" fill="#fff" text-anchor="middle" font-size="24" font-family="Arial">أ</text></svg>
+                    </div>
+                    <div class="card-info">
+                        <h3>لعبة الحروف</h3>
+                        <span class="tag">سرعة بديهة</span>
+                    </div>
+                </a>
 
-            <div class="game-card locked compact">
-                <div class="lock-badge">قريباً</div>
-                <div class="icon-wrapper gray"><svg viewBox="0 0 24 24" class="svg-icon"><path d="M19.439 15.424a1 1 0 0 0-1.026-.145A3.13 3.13 0 0 1 17 15.5a3.13 3.13 0 0 1-2.924-2.072 1 1 0 0 0-1.428-.535 3.13 3.13 0 0 1-3.296 0 1 1 0 0 0-1.428.535A3.13 3.13 0 0 1 5 15.5a3.13 3.13 0 0 1-1.413-.221 1 1 0 0 0-1.026.145l-1.38 1.38a2 2 0 0 0 0 2.828l1.38 1.38a1 1 0 0 0 1.414 0l1.38-1.38a1 1 0 0 1 1.414 0l1.38 1.38a1 1 0 0 0 1.414 0l1.38-1.38a1 1 0 0 1 1.414 0l1.38 1.38a1 1 0 0 0 1.414 0l1.38-1.38a2 2 0 0 0 0-2.828l-1.38-1.38z" fill="currentColor"/></svg></div>
-                <h3>كلماتك</h3>
-            </div>
+                <div class="card locked">
+                    <div class="lock-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
+                    <div class="card-visual dim">
+                        <svg viewBox="0 0 64 64"><path d="M16 16l32 32M48 16L16 48" stroke="#555" stroke-width="2"/><circle cx="32" cy="32" r="14" stroke="#555" stroke-width="2" fill="none"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <h3>إكس أو</h3>
+                        <span class="tag">قريباً</span>
+                    </div>
+                </div>
 
-        </div>
+                <div class="card locked">
+                    <div class="lock-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
+                    <div class="card-visual dim">
+                        <svg viewBox="0 0 64 64"><path d="M12 32a20 20 0 0 1 38-6m-4 16h8v8h-8z" stroke="#555" stroke-width="2" fill="none"/></svg>
+                    </div>
+                    <div class="card-info">
+                        <h3>سوالف</h3>
+                        <span class="tag">قريباً</span>
+                    </div>
+                </div>
+
+                <div class="card locked">
+                    <div class="lock-overlay"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
+                    <div class="card-visual dim">
+                        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" stroke="#555" stroke-width="2" fill="none"/><text x="32" y="42" fill="#555" text-anchor="middle" font-size="30" font-weight="bold">?</text></svg>
+                    </div>
+                    <div class="card-info">
+                        <h3>سؤال وجواب</h3>
+                        <span class="tag">قريباً</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </main>
 
     <footer>
         <div class="footer-container">
             
-            <div class="trust-badge">
-                <a href="https://eauthenticate.saudibusiness.gov.sa/certificate-details/0000139656" class="sbc-link" target="_blank" title="موثق لدى المركز السعودي للأعمال">
-                    <div class="sbc-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-                    </div>
-                    <div class="sbc-text">
-                        <span>موثق في</span>
-                        <strong>منصة الأعمال</strong>
-                    </div>
+            <div class="footer-col about">
+                <h4>ريشة</h4>
+                <p>مرحباً بك في "ريشة" حيث يتميز بالفخامة والإبداع في عرض منتجات رقمية فريدة. نقدم قوالب متميزة باللغة العربية، تجمع بين الجمال الفني والفعالية العملية.</p>
+                <div class="social-icons">
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></a> <a href="#"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></a> </div>
+            </div>
+
+            <div class="footer-col links">
+                <h4>روابط مهمة</h4>
+                <ul>
+                    <li><a href="#" onclick="openModal('privacy'); return false;">من نحن</a></li>
+                    <li><a href="#" onclick="openModal('terms'); return false;">طلبات مخصصة</a></li>
+                    <li><a href="#" onclick="openModal('license'); return false;">الحقوق</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col contact">
+                <h4>تواصل معنا</h4>
+                <ul>
+                    <li>
+                        <span>+966511591952</span>
+                        <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2a9 9 0 0 0-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"/></svg>
+                    </li>
+                    <li>
+                        <span>support@risha.digital</span>
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="trust-area">
+                <a href="https://eauthenticate.saudibusiness.gov.sa/certificate-details/0000139656" target="_blank" class="sbc-link">
+                    <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>موثق في منصة الأعمال</span>
                 </a>
             </div>
-
-            <div class="footer-links">
-                <button onclick="openModal('terms')">الشروط</button>
-                <button onclick="openModal('privacy')">الخصوصية</button>
-                <button onclick="openModal('license')">الحقوق</button>
+            
+            <div class="payment-icons">
+                <div class="pay-icon">Mada</div>
+                <div class="pay-icon">Visa</div>
+                <div class="pay-icon">STC Pay</div>
+                <div class="pay-icon">Apple Pay</div>
             </div>
 
-            <div class="payment-methods">
-                <div class="pay-icon mada" title="Mada">
-                    <svg viewBox="0 0 36 24"><rect width="36" height="24" rx="4" fill="#e0e0e0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">mada</text></svg>
-                </div>
-                <div class="pay-icon visa" title="Visa">
-                    <svg viewBox="0 0 36 24"><rect width="36" height="24" rx="4" fill="#e0e0e0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">VISA</text></svg>
-                </div>
-                <div class="pay-icon apple" title="Apple Pay">
-                    <svg viewBox="0 0 36 24"><rect width="36" height="24" rx="4" fill="#e0e0e0"/><path d="M18 10c0-1 .5-1.5 1-2-.5 0-1 .5-1 1s.5 1.5 1 2z" fill="#333"/><text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" font-size="6" font-weight="bold" fill="#333">Pay</text></svg>
-                </div>
-            </div>
-
-            <div class="copy-right">
-                <p>إحدى منتجات <a href="https://risha.sa" target="_blank">RISHA PLATFORM</a> الرقمية © <span id="year"></span></p>
+            <div class="copyrights">
+                صنع بإتقان على | 2026 منصة سلة
             </div>
         </div>
     </footer>
 
-    <div id="modal-terms" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">شروط الاستخدام <button class="close-btn" onclick="closeModal()">✕</button></div>
-            <div class="modal-body">
-                <p>مرحباً بك في موقع ريشة. يرجى العلم بأن هذا الموقع مخصص للترفيه والاستخدام الشخصي فقط. يُمنع منعاً باتاً استغلال الألعاب لأغراض تجارية أو إعادة بيعها دون إذن.</p>
-            </div>
+    <div id="modal-privacy" class="modal">
+        <div class="modal-box">
+            <span class="close" onclick="closeModal()">×</span>
+            <h3>سياسة الخصوصية</h3>
+            <p>محتوى سياسة الخصوصية يوضع هنا...</p>
         </div>
     </div>
-
-    <div id="modal-privacy" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">سياسة الخصوصية <button class="close-btn" onclick="closeModal()">✕</button></div>
-            <div class="modal-body">
-                <p>نحن نحترم خصوصيتك. موقع ريشة لا يقوم بجمع أو تخزين أي بيانات شخصية أو حساسة أثناء اللعب. بياناتك ملك لك وحدك.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-license" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">الحقوق والملكية <button class="close-btn" onclick="closeModal()">✕</button></div>
-            <div class="modal-body">
-                <p>جميع حقوق التصميم والبرمجة محفوظة لمنصة ريشة (Risha Platform). هذا الموقع محمي بموجب قوانين الملكية الفكرية. يُمنع النسخ أو الهندسة العكسية.</p>
-            </div>
-        </div>
-    </div>
-
     <script src="script.js"></script>
 </body>
 </html>
