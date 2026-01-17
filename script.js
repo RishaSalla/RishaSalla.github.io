@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // إخفاء شاشة التحميل بعد 2.5 ثانية
+    // إخفاء  التحميل بعد 2.5 ثانية
     const loader = document.getElementById('loader');
     setTimeout(() => {
         loader.style.opacity = '0';
