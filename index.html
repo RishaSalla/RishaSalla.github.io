@@ -10,28 +10,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* عدنا للتنسيق الأصلي البسيط */
-        .grid { gap: 20px; } /* مسافة طبيعية */
+        /* --- تنسيقات الشبكة والبطاقات الجديدة (الكبيرة) --- */
+        .grid { 
+            gap: 25px; 
+            /* تحسين الشبكة للشاشات الكبيرة لتعرض 3 بجانب بعض */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
 
-        /* البطاقة تعود كرابط كامل */
         a.card { 
             text-decoration: none;
             display: flex; flex-direction: column; 
             height: 100%;
-            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.03); /* خلفية خفيفة جداً */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        /* تأثير التحويم الأصلي */
-        a.card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
 
+        a.card:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            border-color: var(--accent-gold); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* منطقة الرسمة (الغلاف الكبير) */
         .card-visual {
-            /* لا توجد أيقونات تشغيل إضافية، فقط الرسمة */
-            position: relative;
+            width: 100%;
+            aspect-ratio: 4/5; /* نسبة أبعاد طولية مثل البوسترات */
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 100%);
+            padding: 20px; /* هوامش داخلية للرسمة */
+            box-sizing: border-box;
+        }
+
+        /* تكبير الـ SVG ليملأ المساحة بذكاء */
+        .card-visual svg { 
+            width: 85%; /* يملأ 85% من العرض */
+            height: 85%; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            transition: 0.4s;
+        }
+        
+        a.card:hover .card-visual svg {
+            transform: scale(1.05); /* تكبير بسيط عند التحويم */
+            filter: drop-shadow(0 8px 15px rgba(200, 161, 101, 0.2));
         }
 
         .card-info { 
-            display: flex; flex-direction: column; gap: 5px; 
-            flex-grow: 1; justify-content: flex-start;
+            padding: 15px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.2);
         }
+
+        .card-info h3 { margin: 0; font-size: 1.2rem; color: #fff; }
+        .tag { font-size: 0.85rem; color: #888; margin-top: 5px; display: block;}
 
         /* --- تنسيقات الفوتر --- */
         .social-icons { display: flex; gap: 15px; margin-top: 15px; }
@@ -95,7 +128,11 @@
                 
                 <a href="/mishnaqa" class="card">
                     <div class="card-visual">
-                        <svg viewBox="0 0 64 64"><path d="M10 54h44M32 54V10M32 10h16v8m-4 14a4 4 0 1 1 8 0 4 4 0 0 1-8 0m4 4v10m-4-6l4 4 4-4m-4 4v4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                        <svg viewBox="0 0 100 100">
+                            <path d="M20 90 H80 M50 90 V20 M50 20 H70 V35" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="70" cy="45" r="8" fill="none" stroke="#fff" stroke-width="3"/>
+                            <path d="M70 53 V75 M60 60 L70 55 L80 60 M65 85 L70 75 L75 85" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
                     </div>
                     <div class="card-info">
                         <h3>المشنقة</h3>
@@ -105,7 +142,15 @@
 
                 <a href="/HROF-GAME" class="card">
                     <div class="card-visual">
-                        <svg viewBox="0 0 64 64"><rect x="12" y="12" width="40" height="40" rx="4" fill="none" stroke="#fff" stroke-width="2"/><text x="32" y="42" fill="#fff" text-anchor="middle" font-size="24" font-family="Arial">أ</text></svg>
+                        <svg viewBox="0 0 100 100">
+                            <rect x="10" y="10" width="80" height="80" rx="8" fill="none" stroke="#fff" stroke-width="2" opacity="0.3"/>
+                            
+                            <text x="30" y="40" fill="#fff" font-size="25" font-family="Arial" transform="rotate(-15 30 40)" opacity="0.9">أ</text>
+                            <text x="70" y="35" fill="#fff" font-size="20" font-family="Arial" transform="rotate(20 70 35)" opacity="0.7">ب</text>
+                            <text x="50" y="60" fill="#C8A165" font-size="30" font-family="Arial" transform="rotate(5 50 60)" opacity="1">ج</text>
+                            <text x="25" y="80" fill="#fff" font-size="18" font-family="Arial" transform="rotate(-10 25 80)" opacity="0.6">س</text>
+                            <text x="75" y="75" fill="#fff" font-size="22" font-family="Arial" transform="rotate(15 75 75)" opacity="0.8">ي</text>
+                        </svg>
                     </div>
                     <div class="card-info">
                         <h3>لعبة الحروف</h3>
@@ -115,12 +160,12 @@
 
                 <a href="http://risha.games/imposter/" class="card">
                     <div class="card-visual">
-                        <svg viewBox="0 0 64 64">
-                            <path d="M14 26 h36 l-4 -12 h-28 z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-                            <path d="M6 26 h52" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                            <circle cx="22" cy="42" r="7" fill="none" stroke="#fff" stroke-width="2"/>
-                            <circle cx="42" cy="42" r="7" fill="none" stroke="#fff" stroke-width="2"/>
-                            <path d="M29 42 h6" fill="none" stroke="#fff" stroke-width="2"/>
+                        <svg viewBox="0 0 100 100">
+                            <path d="M20 45 H80 L70 25 H30 Z" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+                            <path d="M10 45 H90" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="35" cy="70" r="12" fill="none" stroke="#fff" stroke-width="3"/>
+                            <circle cx="65" cy="70" r="12" fill="none" stroke="#fff" stroke-width="3"/>
+                            <path d="M47 70 H53" fill="none" stroke="#fff" stroke-width="3"/>
                         </svg>
                     </div>
                     <div class="card-info">
@@ -131,7 +176,19 @@
 
                 <a href="https://risha.games/KalimaTac/" class="card">
                     <div class="card-visual">
-                        <svg viewBox="0 0 64 64"><rect x="12" y="12" width="40" height="40" rx="4" fill="none" stroke="#fff" stroke-width="2"/><text x="32" y="42" fill="#fff" text-anchor="middle" font-size="24" font-family="Cairo">ك</text></svg>
+                        <svg viewBox="0 0 100 100">
+                            <line x1="35" y1="10" x2="35" y2="90" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="65" y1="10" x2="65" y2="90" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="10" y1="35" x2="90" y2="35" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="10" y1="65" x2="90" y2="65" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                            
+                            <text x="22" y="58" fill="#C8A165" font-size="24" font-family="Cairo" text-anchor="middle">ك</text>
+                            <text x="50" y="58" fill="#fff" font-size="24" font-family="Cairo" text-anchor="middle">ل</text>
+                            <text x="78" y="58" fill="#fff" font-size="24" font-family="Cairo" text-anchor="middle">م</text>
+                            
+                            <path d="M15 15 L30 30 M30 15 L15 30" stroke="#fff" stroke-width="2" transform="translate(5,0)" opacity="0.5"/>
+                            <circle cx="80" cy="80" r="8" fill="none" stroke="#fff" stroke-width="2" opacity="0.5"/>
+                        </svg>
                     </div>
                     <div class="card-info">
                         <h3>كلمتاك</h3>
@@ -142,7 +199,7 @@
                 <div class="card locked">
                     <div class="lock-overlay"><svg viewBox="0 0 24 24" style="fill: #fff;"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
                     <div class="card-visual dim">
-                        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" stroke="#555" stroke-width="2" fill="none"/><text x="32" y="42" fill="#555" text-anchor="middle" font-size="30" font-weight="bold">?</text></svg>
+                        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="20" stroke="#555" stroke-width="3" fill="none"/><path d="M35 35 L65 65 M65 35 L35 65" stroke="#555" stroke-width="3"/></svg>
                     </div>
                     <div class="card-info">
                         <h3>إكس أو</h3>
@@ -153,7 +210,7 @@
                 <div class="card locked">
                     <div class="lock-overlay"><svg viewBox="0 0 24 24" style="fill: #fff;"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
                     <div class="card-visual dim">
-                        <svg viewBox="0 0 64 64"><path d="M12 32a20 20 0 0 1 38-6m-4 16h8v8h-8z" stroke="#555" stroke-width="2" fill="none"/></svg>
+                        <svg viewBox="0 0 100 100"><path d="M20 50 A30 30 0 0 1 80 50 A30 30 0 0 1 50 80 L20 80 Z" stroke="#555" stroke-width="3" fill="none"/><circle cx="35" cy="50" r="3" fill="#555"/><circle cx="50" cy="50" r="3" fill="#555"/><circle cx="65" cy="50" r="3" fill="#555"/></svg>
                     </div>
                     <div class="card-info">
                         <h3>سوالف</h3>
@@ -164,7 +221,7 @@
                 <div class="card locked">
                     <div class="lock-overlay"><svg viewBox="0 0 24 24" style="fill: #fff;"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
                     <div class="card-visual dim">
-                        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" stroke="#555" stroke-width="2" fill="none"/><text x="32" y="42" fill="#555" text-anchor="middle" font-size="30" font-weight="bold">?</text></svg>
+                        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" stroke="#555" stroke-width="3" fill="none"/><text x="50" y="65" fill="#555" text-anchor="middle" font-size="40" font-weight="bold">؟</text></svg>
                     </div>
                     <div class="card-info">
                         <h3>سؤال وجواب</h3>
@@ -175,7 +232,7 @@
                 <div class="card locked">
                     <div class="lock-overlay"><svg viewBox="0 0 24 24" style="fill: #fff;"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg></div>
                     <div class="card-visual dim">
-                        <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" stroke="#555" stroke-width="2" fill="none"/><text x="32" y="42" fill="#555" text-anchor="middle" font-size="30" font-weight="bold">?</text></svg>
+                        <svg viewBox="0 0 100 100"><rect x="25" y="20" width="50" height="60" rx="5" stroke="#555" stroke-width="3" fill="none"/><line x1="35" y1="35" x2="65" y2="35" stroke="#555" stroke-width="3"/><rect x="35" y="50" width="10" height="10" fill="#555"/><rect x="55" y="50" width="10" height="10" fill="#555"/><rect x="35" y="65" width="10" height="10" fill="#555"/><rect x="55" y="65" width="10" height="10" fill="#555"/></svg>
                     </div>
                     <div class="card-info">
                         <h3>حسبتاك</h3>
