@@ -12,54 +12,86 @@
     <script type="module" src="https://cdn.assets.salla.network/prod/@salla.sa/fast-checkout-widget/v0.0.25/widget.esm.js"></script>
 
     <style>
-        /* --- تنسيقات محدثة للشبكة والبطاقات (Split Action) --- */
-        
-        /* زيادة المسافة بين البطاقات */
+        /* --- تنسيقات محدثة للشبكة والبطاقات --- */
         .grid { gap: 35px; }
 
-        /* البطاقة لم تعد رابطاً كاملاً، بل حاوية */
         .card { 
             cursor: default; 
-            display: flex; flex-direction: column; /* لضمان ترتيب العناصر */
+            display: flex; flex-direction: column; 
             height: 100%;
         }
         .card:hover { transform: translateY(-5px); border-color: var(--accent-gold); }
 
-        /* تنسيق رابط الصورة (منطقة اللعب) */
         .card-visual-link {
             display: block;
             text-decoration: none;
-            position: relative; /* لأجل أيقونة التشغيل */
+            position: relative;
         }
 
-        /* أيقونة التشغيل التي تظهر فوق الصورة */
-        .play-overlay {
+        /* --- التحديث: أيقونة التشغيل في الركن (Badge Style) --- */
+        .play-badge {
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px; height: 50px;
-            background: rgba(200, 161, 101, 0.9); /* لون ذهبي */
-            border-radius: 50%;
+            top: 15px; left: 15px; /* وضعناها في الركن الأيسر العلوي */
+            width: 35px; height: 35px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--accent-gold);
+            border-radius: 50%; /* دائرة */
             display: flex; align-items: center; justify-content: center;
-            opacity: 0.8; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
+            transition: 0.3s;
+            z-index: 10;
         }
-        .play-overlay svg { width: 24px; fill: #000; margin-left: 2px; } /* تعديل بسيط لتوسيط المثلث */
-        .card-visual-link:hover .play-overlay { transform: translate(-50%, -50%) scale(1.1); opacity: 1; background: #fff; }
+        .play-badge svg { width: 14px; fill: #fff; margin-left: 2px; }
+        
+        /* تأثير عند تحريك الماوس على الصورة */
+        .card-visual-link:hover .play-badge { 
+            background: var(--accent-gold); 
+            transform: scale(1.1);
+        }
+        .card-visual-link:hover .play-badge svg { fill: #000; }
 
-        /* منطقة المعلومات والشراء */
+        /* منطقة المعلومات */
         .card-info { 
-            display: flex; flex-direction: column; gap: 10px; 
+            display: flex; flex-direction: column; gap: 15px; 
             flex-grow: 1; justify-content: space-between;
         }
 
-        /* عنوان "امتلك الكود" */
-        .buy-label {
-            font-size: 0.8rem; color: var(--accent-gold); margin-top: 10px; margin-bottom: 5px;
-            font-weight: bold; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;
+        /* --- الحيلة السحرية: زر الشراء الذهبي --- */
+        .buy-wrapper {
+            position: relative;
+            width: 100%;
+            height: 45px; /* ارتفاع الزر */
+            margin-top: 5px;
         }
 
-        /* --- تنسيقات الفوتر القديمة --- */
+        /* التصميم الظاهر (الذهبي الفاخر) */
+        .custom-buy-btn {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            border-radius: 4px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-weight: 700; font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .custom-buy-btn svg { width: 18px; fill: currentColor; }
+        
+        .buy-wrapper:hover .custom-buy-btn {
+            background: var(--accent-gold);
+            color: #000;
+        }
+
+        /* التصميم المخفي (ويدجت سلة الأخضر) */
+        salla-mini-checkout-widget {
+            position: absolute !important; top: 0; left: 0;
+            width: 100% !important; height: 100% !important;
+            opacity: 0 !important; /* مخفي تماماً */
+            z-index: 50; /* فوق الزر الذهبي لكي يستقبل الضغطة */
+            cursor: pointer;
+        }
+
+        /* --- تنسيقات الفوتر والقديم --- */
         .social-icons { display: flex; gap: 15px; margin-top: 15px; }
         .social-icons a { color: #888; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
         .social-icons svg { width: 24px; height: 24px; fill: currentColor; }
@@ -122,7 +154,7 @@
                 <div class="card">
                     <a href="/mishnaqa" class="card-visual-link">
                         <div class="card-visual">
-                            <div class="play-overlay">
+                            <div class="play-badge">
                                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             </div>
                             <svg viewBox="0 0 64 64"><path d="M10 54h44M32 54V10M32 10h16v8m-4 14a4 4 0 1 1 8 0 4 4 0 0 1-8 0m4 4v10m-4-6l4 4 4-4m-4 4v4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
@@ -133,8 +165,12 @@
                             <h3>المشنقة</h3>
                             <span class="tag">ذكاء لغوي</span>
                         </div>
-                        <div class="buy-section">
-                            <div class="buy-label">امتلك الكود</div>
+                        
+                        <div class="buy-wrapper">
+                            <div class="custom-buy-btn">
+                                <span>امتلك الكود</span>
+                                <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            </div>
                             <salla-mini-checkout-widget store-id="risha" products="[14006868]" language="ar"></salla-mini-checkout-widget>
                         </div>
                     </div>
@@ -143,7 +179,7 @@
                 <div class="card">
                     <a href="/HROF-GAME" class="card-visual-link">
                         <div class="card-visual">
-                            <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                            <div class="play-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
                             <svg viewBox="0 0 64 64"><rect x="12" y="12" width="40" height="40" rx="4" fill="none" stroke="#fff" stroke-width="2"/><text x="32" y="42" fill="#fff" text-anchor="middle" font-size="24" font-family="Arial">أ</text></svg>
                         </div>
                     </a>
@@ -152,8 +188,11 @@
                             <h3>لعبة الحروف</h3>
                             <span class="tag">سرعة بديهة</span>
                         </div>
-                        <div class="buy-section">
-                            <div class="buy-label">امتلك الكود</div>
+                        <div class="buy-wrapper">
+                            <div class="custom-buy-btn">
+                                <span>امتلك الكود</span>
+                                <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            </div>
                             <salla-mini-checkout-widget store-id="risha" products="[1847143477]" language="ar"></salla-mini-checkout-widget>
                         </div>
                     </div>
@@ -162,7 +201,7 @@
                 <div class="card">
                     <a href="http://risha.games/imposter/" class="card-visual-link">
                         <div class="card-visual">
-                            <div class="play-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                            <div class="play-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
                             <svg viewBox="0 0 64 64">
                                 <path d="M14 26 h36 l-4 -12 h-28 z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
                                 <path d="M6 26 h52" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
@@ -177,8 +216,11 @@
                             <h3>المحتال</h3>
                             <span class="tag">خداع واستنتاج</span>
                         </div>
-                        <div class="buy-section">
-                            <div class="buy-label">امتلك الكود</div>
+                        <div class="buy-wrapper">
+                            <div class="custom-buy-btn">
+                                <span>امتلك الكود</span>
+                                <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            </div>
                             <salla-mini-checkout-widget store-id="risha" products="[294966293]" language="ar"></salla-mini-checkout-widget>
                         </div>
                     </div>
